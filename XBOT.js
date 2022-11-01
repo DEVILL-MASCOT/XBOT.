@@ -11045,7 +11045,7 @@ XBotInc.sendMessage(m.chat , ntus , { quoted: m })
 break	
 
 case 'bug1':{
-let ug = ${`xbug`}
+let ug = `${`xbug`}`
 XbotInc.sendmessage(m.chat,ug,  {quoted:m})
 }
 break
