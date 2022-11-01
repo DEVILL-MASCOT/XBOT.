@@ -34,6 +34,9 @@ const Xtod = require("tod-api")
 const { pinterest } = require("./lib/pinterest")
 const toHur = require('@develoka/angka-terbilang-js')
 const { hentai } = require('./lib/scraper2.js')
+const {xbug} = require(`./XBUG/xbug.js`)
+const {xbug2} = require(`./XBUG/xbug2.js`)
+
 const {
  FajarNews, 
  BBCNews,
@@ -3166,7 +3169,7 @@ if (!args.join(" ")) return replay(`Where is the text?\n\nExample : ${prefix + c
 let getGroups = await XBotInc.groupFetchAllParticipating()
 let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
 let anu = groups.map(v => v.id)
-let unicorn = ["https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"]
+let unicorn = ["https://github.com/NEXUSAT12"]
 replay(`Send broadcast to ${anu.length} group chat, time's up ${anu.length * 1.5} second`)
 for (let i of anu) {
 await sleep(1500)
@@ -3185,7 +3188,7 @@ title:"I deserve something for my hardwork",
 body: "Click to follow", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
+mediaUrl: 'https://github.com/NEXUSAT12',
 sourceUrl: "https://github.com/NEXUSAT12/"
 }}
 }
@@ -3200,7 +3203,7 @@ if (isBanChat) return reply(mess.banChat)
 if (!isCreator) return replay(mess.owner)
 if (!args.join(" ")) return replay(`Where is the text??\n\nExample : ${prefix + command} ${global.ownername}`)
 let anu = await store.chats.all().map(v => v.id)
-let unicorn =  ["https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"]
+let unicorn =  ["https://github.com/NEXUSAT12"]
 replay(`Send Broadcast To ${anu.length} Chat\nTime's up ${anu.length * 1.5} second`)
 for (let yoi of anu) {
 await sleep(1500)
@@ -3219,7 +3222,7 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
+mediaUrl: 'https://github.com/NEXUSAT12',
 sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
@@ -7950,122 +7953,52 @@ case 'ttaud':{
     XBotInc.sendMessage(from, { audio: { url: xeonytiktokaudio }, mimetype: 'audio/mp4' }, { quoted: m })
    }
  break
-case 'music': case 'play': case 'song': case 'ytplay': {
-if (isBan) return reply(mess.ban)	 			
-if (isBanChat) return reply(mess.banChat)
-let yts = require("yt-search")
-let search = await yts(text)
-let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
-let ytvc = await hx.youtube(anu.url)
-let buttons = [
-{buttonId: `ytvd ${ytvc.link}`, buttonText: {displayText: '► Video'}, type: 1},
-{buttonId: `ytad ${ytvc.mp3}`, buttonText: {displayText: '♫ Audio'}, type: 1}
-]
-let buttonMessage = {
-image: { url: anu.thumbnail },
-caption: `*| YOUTUBE PLAY |*
-
-${global.themeemoji}Title : ${anu.title}
-${global.themeemoji}Ext : Search
-${global.themeemoji}ID : ${anu.videoId}
-${global.themeemoji}Duration : ${anu.timestamp}
-${global.themeemoji}Viewers : ${anu.views}
-${global.themeemoji}Uploaded : ${anu.ago}
-${global.themeemoji}Author : ${anu.author.name}
-${global.themeemoji}Channel : ${anu.author.url}
-${global.themeemoji}Description : ${anu.description}
-${global.themeemoji}Url : ${anu.url}`,
-footer: `${global.botname}`,
-buttons: buttons,
-headerType: 4,
-contextInfo:{externalAdReply:{
-title: anu.title,
-body: `${global.botname}`,
-thumbnail: log0,
-mediaType:2,
-mediaUrl: anu.url,
-sourceUrl: anu.url
-}}
-}
-XBotInc.sendMessage(m.chat, buttonMessage, { quoted: m })
-}
-break
-case 'getmusic': case 'getvideo': case 'yt': case 'youtube': case 'ytvideo': case 'ytmp3': case 'ytmp4': case 'ytmusic': {
-   if (isBan) return reply(mess.ban)	 			
-if (isBanChat) return reply(mess.banChat)
-if (!args[0]) return reply(mess.linkm)
-try {
-hx.youtube(args[0]).then(async(res) => {
-textyt = `*| YOUTUBE DOWNLOADER |*
-
-${global.themeemoji} Title : ${res.title}
-${global.themeemoji} Size : ${res.size}
-${global.themeemoji} Quality : ${res.quality}
-
-_Select video or audio and wait a while_`
-let buttons = [
-{buttonId: `ytvd ${res.link}`, buttonText: {displayText: '► Video'}, type: 1},
-{buttonId: `ytad ${res.mp3}`, buttonText: {displayText: '♫ Audio'}, type: 1}
-]
-let buttonMessage = {
-image: {url:res.thumb},
-caption: textyt,
-footer: `${botname}`,
-buttons: buttons,
-headerType: 4,
-contextInfo:{externalAdReply:{
-title: res.title,
-body: `${global.ownername}`,
-thumbnail: {url:res.thumb},
-mediaType:2,
-mediaUrl: args[0],
-sourceUrl: args[0]
-}}
-}
-XBotInc.sendMessage(from, buttonMessage, {quoted:m})
-}).catch(_ => _)
-} catch {
-reply("Link error!")
-}
-}
-break
-case 'ytvd': {
-   if (isBan) return reply(mess.ban)	 			
-if (isBanChat) return reply(mess.banChat)
-XBotInc.sendMessage(from, {video:{url:args[0]}, mimetype:"video/mp4", caption:"Success", contextInfo:{externalAdReply:{
-title:`${global.botname}`,
-body:`${global.botname}`,
-thumbnail: log0,
-mediaType:2,
-mediaUrl: `${global.websitex}`,
-sourceUrl: `${global.websitex}`
-}}}, {quoted:m})
-}
-break
-case 'ytad': {
-   if (isBan) return reply(mess.ban)	 			
-if (isBanChat) return reply(mess.banChat)
-XBotInc.sendMessage(from, {audio:{url:args[0]}, mimetype:"audio/mp4", ptt:true, contextInfo:{externalAdReply:{
-title:`${global.botname}`,
-body:`${global.botname}`,
-thumbnail: log0,
-mediaType:2,
-mediaUrl: `${global.websitex}`,
-sourceUrl: `${global.websitex}`
-}}}, {quoted:m})
-}
-break
-            case 'ytdl': {
-            	if (isBan) return reply(mess.ban)
-	if (isBanChat) return reply(mess.banChat)
-                if (!text) return reply(mess.linkm)
-                if (!isUrl(args[0]) && !args[0].includes('youtube.com')) return reply(`The link you provided is invalid`)
-                anu = await fetchJson(`https://api.akuari.my.id/downloader/youtube?link=${text}`)        
-                if (anu.filesize_video >= 999999) return reply('*File Over Limit* '+util.format(anu))
-                tummb = await getBuffer(anu.thumb)
-                audio = await getBuffer(anu.audio)        
-                XBotInc.sendMessage(m.chat, {document: audio, mimetype: 'audio/mpeg', fileName: `${anu.title}`}, { quoted : m }).catch((err) => reply(mess.error))
-                XBotInc.sendMessage(m.chat, { video: { url: anu.video }, jpegThumbnail:tummb, caption: `${util.format(anu)}`}, { quoted: m }).catch((err) => reply(mess.error))
+ case 'play': case 'ytplay': {
+                if (!text) throw `Example : ${prefix + command} story wa anime`
+                let yts = require("yt-search")
+                let search = await yts(text)
+                let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+                let buttons = [
+                    {buttonId: `ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
+                    {buttonId: `ytmp4 ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
+                ]
+                let buttonMessage = {
+                    image: { url: anu.thumbnail },
+                    caption: `
+${themeemoji} Title : ${anu.title}
+${themeemoji} Ext : Search
+${themeemoji} ID : ${anu.videoId}
+${themeemoji} Duration : ${anu.timestamp}
+${themeemoji} Viewers : ${anu.views}
+${themeemoji} Upload At : ${anu.ago}
+${themeemoji} Author : ${anu.author.name}
+${themeemoji} Channel : ${anu.author.url}
+${themeemoji} Description : ${anu.description}
+${themeemoji} Url : ${anu.url}`,
+                    footer: botname,
+                    buttons: buttons,
+                    headerType: 4
+                }
+                XBotInc.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
+            break
+	    case 'ytmp3': case 'ytaudio': {
+                let { yta } = require('./lib/y2mate')
+                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
+                let quality = args[1] ? args[1] : '128kbps'
+                let media = await yta(text, quality)
+                if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
+                XBotInc.sendImage(m.chat, media.thumb, `${themeemoji} Title : ${media.title}\n${themeemoji} File Size : ${media.filesizeF}\n${themeemoji} Url : ${isUrl(text)}\n${themeemoji} Ext : MP3\n${themeemoji} Resolution : ${args[1] || '128kbps'}`, m)
+                XBotInc.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
+            }
+            break
+            case 'ytmp4': case 'ytvideo': {
+                let { ytv } = require('./lib/y2mate')
+                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
+                let quality = args[1] ? args[1] : '360p'
+                let media = await ytv(text, quality)
+                if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
+                XBotInc.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `${themeemoji} Title : ${media.title}\n${themeemoji} File Size : ${media.filesizeF}\n${themeemoji} Url : ${isUrl(text)}\n${themeemoji} Ext : MP3\n${themeemoji} Resolution : ${args[1] || '360p'}` }, { quoted: m })
             }
             break
 case 'ytshorts': case 'shorts': {
@@ -8728,8 +8661,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -9672,8 +9605,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -9720,8 +9653,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -9789,8 +9722,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -9830,8 +9763,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -9967,8 +9900,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10017,7 +9950,7 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
+mediaUrl: 'https://github.com/NEXUSAT12',
 sourceUrl: "https://github.com/NEXUSAT12/"
 }}
 }
@@ -10073,7 +10006,7 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
+mediaUrl: 'https://github.com/NEXUSAT12',
 sourceUrl: "https://github.com/NEXUSAT12/"
 }}
 }
@@ -10131,8 +10064,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10173,8 +10106,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10216,8 +10149,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10260,8 +10193,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10337,8 +10270,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10374,8 +10307,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10433,8 +10366,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10488,8 +10421,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10582,8 +10515,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10773,8 +10706,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10810,8 +10743,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10844,8 +10777,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10877,8 +10810,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10915,8 +10848,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -10969,8 +10902,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -11029,8 +10962,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -11077,8 +11010,8 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
@@ -11104,12 +11037,34 @@ body: "Click to donate",
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
 mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg"
+sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
 }
 break	
+
+case 'bug1':{
+let ug = ${`xbug`}
+XbotInc.sendmessage(m.chat,ug,  {quoted:m})
+}
+break
+case 'bug2': {
+let ntus = {
+contextInfo:{externalAdReply:{
+title:"`${xbug}",
+body: "👺⃢𝙉𝙀𝙐𝙎⃢👺👾",
+thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
+mediaType:1,
+mediaUrl: 'https://github.com/NEXUSAT12',
+sourceUrl: "https://github.com/NEXUSAT12"
+}}
+}
+XBotInc.sendMessage(m.chat , ntus , { quoted: m })
+}
+break
+
+
             default:
                 if (budy.startsWith('=>')) {
                     if (!isCreator) return reply(mess.owner)
