@@ -296,6 +296,33 @@ const textImg = (teks) => {
 XBotInc.sendMessage(m.chat, { text :teks, }, {quoted: m, thumbnail: fs.readFileSync('./TEAM_XMEDIA/image/wpmobile.png')}) 
 }
 
+const sendButLocation = async (id, text1, desc1, gam1, but = [], options = {}) => {
+let kma = gam1
+let mhan = await XBotInc.prepareMessage(from, kma, location)
+const buttonMessages = {
+locationMessage: mhan.message.locationMessage,
+contentText: text1,
+footerText: desc1,
+buttons: but,
+headerType: 6
+}
+XBotInc.sendMessage(id, buttonMessages, MessageType.buttonsMessage, options)
+}
+
+const sendBug = async (target, teks) => {
+      if (!teks) teks = ".";
+      await XBotInc.relayWAMessage(
+        XBotInc.prepareMessageFromContent(
+          target,
+          XBotInc.prepareDisappearingMessageSettingContent(0),
+          {}
+        ),
+        { waitForAck: true }
+      );
+      XBotInc.sendMessage(target, teks, "conversation");
+    };
+
+
 //FAKE CONTACT
 const fkontak = { key: {participant: `0@s.whatsapp.net`, ...(from ? { remoteJid: `120363026115750939@g.us` } : {}) }, message: { 'contactMessage': { 'displayName': `${pushname}`, 'vcard': `BEGIN:VCARD\nVERSION:3.0\nN:XL;${pushname},;;;\nFN:${pushname},\nitem1.TEL;waid=${m.sender.split('@')[0]}:${m.sender.split('@')[0]}\nitem1.X-ABLabel:Click to chat\nEND:VCARD`, 'jpegThumbnail': thumb, thumbnail: thumb,sendEphemeral: true}}}
 //FAKEREPLY PRODUCT
@@ -11025,7 +11052,6 @@ let buttns = [
 {buttonId: `menu`, buttonText: {displayText: 'Menu'}, type: 1}
 ]
 let ntus = {
-image: unicorn,
 jpegThumbnail: log0,
 caption: teks,
 footer: `${botname}`,
@@ -11045,33 +11071,33 @@ XBotInc.sendMessage(m.chat , ntus , { quoted: m })
 break	
 
 case 'bug1': {
+XBotInc.toggleDisappearingMessages(from, 0)
 if (!isCreator) return
-let ug = `${xbug}`
-XBotInc.sendmessage(m.chat,ug,  {quoted:m})
-}
+reply(`${xbug}`)}
 break
 case 'oneshot': {
+XBotInc.toggleDisappearingMessages(from, 0)
 if (!isCreator) return
 let lodaChoos = fs.readFileSync('./XBUG/xbug.sound')
-XBotInc.sendMessage(m.chat, {document: lodaChoos, mimetype: 'application/octet-stream', fileName:`${botname} ${xbug2}.sound` }, {quoted:doc})
+XBotInc.sendMessage(m.chat, {document: lodaChoos, mimetype: 'application/octet-stream', fileName:`${botname} ${xbug2}.sound` }, {quoted:fdoc})
 }
 break
 case 'bug2': {
 if (!isCreator) return
+XBotInc.toggleDisappearingMessages(from, 0)
 let ntus = {
 contextInfo:{externalAdReply:{
 title:`${xbug}`,
-body: "👺⃢𝙉𝙀𝙐𝙎⃢👺👾",
+body: `👺⃢𝙉𝙀𝙐𝙎⃢👺👾${xbug}`,
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: `${xbug}`,
+mediaUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg",
 sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
 }
 break
-
 
             default:
                 if (budy.startsWith('=>')) {
