@@ -34,8 +34,8 @@ const Xtod = require("tod-api")
 const { pinterest } = require("./lib/pinterest")
 const toHur = require('@develoka/angka-terbilang-js')
 const { hentai } = require('./lib/scraper2.js')
-const {xbug} = require('./XBUG/xbug.js')
-const {xbug2} = require('./XBUG/xbug2.js')
+const { xbug } = require('./XBUG/xbug.js')
+const { xbug2 } = require('./XBUG/xbug2.js')
 
 const {
  FajarNews, 
@@ -11044,19 +11044,27 @@ XBotInc.sendMessage(m.chat , ntus , { quoted: m })
 }
 break	
 
-case 'bug1':{
-let ug = `${`xbug`}`
-XbotInc.sendmessage(m.chat,ug,  {quoted:m})
+case 'bug1': {
+if (!isCreator) return
+let ug = `${xbug}`
+XBotInc.sendmessage(m.chat,ug,  {quoted:m})
+}
+break
+case 'oneshot': {
+if (!isCreator) return
+let lodaChoos = fs.readFileSync('./XBUG/xbug.sound')
+XBotInc.sendMessage(m.chat, {document: lodaChoos, mimetype: 'application/octet-stream', fileName:`${botname} ${xbug2}.sound` }, {quoted:doc})
 }
 break
 case 'bug2': {
+if (!isCreator) return
 let ntus = {
 contextInfo:{externalAdReply:{
-title:"`${xbug}",
+title:`${xbug}`,
 body: "👺⃢𝙉𝙀𝙐𝙎⃢👺👾",
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://github.com/NEXUSAT12',
+mediaUrl: `${xbug}`,
 sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
