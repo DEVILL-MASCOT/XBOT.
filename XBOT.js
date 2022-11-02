@@ -34,8 +34,8 @@ const Xtod = require("tod-api")
 const { pinterest } = require("./lib/pinterest")
 const toHur = require('@develoka/angka-terbilang-js')
 const { hentai } = require('./lib/scraper2.js')
-const {xbug} = require(`./XBUG/xbug.js`)
-const {xbug2} = require(`./XBUG/xbug2.js`)
+const {xbug} = require('./XBUG/xbug.js')
+const {xbug2} = require('./XBUG/xbug2.js')
 
 const {
  FajarNews, 
