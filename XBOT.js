@@ -8063,7 +8063,7 @@ let buf = await getBuffer(data.thumbnail)
 if (isBanChat) return reply(mess.banChat)
 if (!args.join(" ")) return reply("What picture are you looking for?")
 try {
-let hx.pinterest(args.join(" ")).then(async(res) => {
+hx.pinterest(args.join(" ")).then(async(res) => {
 let imgnyee = res[Math.floor(Math.random() * res.length)]
 let buttons = [
 {buttonId: `pinterest ${args.join(" ")}`, buttonText: {displayText: 'Next Image 👀'}, type: 1}
