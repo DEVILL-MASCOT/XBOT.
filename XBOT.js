@@ -540,12 +540,12 @@ const reply = (teks) => {
 		setting.status = new Date() * 1
 	    }
 	}
-	
-	//antispam or auto react
-//if (m.message && msgFilter.isFiltered(from)) {
-//console.log(`${global.themeemoji}[SPAM]`, color(moment(m.messageTimestamp * 1000).format('DD/MM/YYYY HH:mm:ss'), 'yellow'), color(`${command} [${args.length}]`), 'from', color(m.pushName))
-//return XBotInc.sendMessage(from, { react: { text: `${global.themeemoji}`, key: m.key }})
-//}
+///////auto chat bot///////	
+    if (!isCmd && !m.isGroup){
+    const botreply = await axios.get(`https://api.simsimi.net/v2/?text=${budy}&lc=en`)
+    let txt = `${botreply.data.success}`
+    m.reply(txt)
+    }
 	
 //auto read whatsapp status
 if (autoreadsw) {
@@ -614,7 +614,6 @@ XBotInc.sendMessage(from, {text:`\`\`\`「 Group Link Detected 」\`\`\`\n\n@${k
 } else {
 }
 }
-  // Antiwame by xeon
   if (antiWame)
   if (budy.includes(`wa.me`)) {
 if (!isBotAdmins) return
@@ -2276,7 +2275,7 @@ if (isBanChat) return reply(mess.banChat)
                 if (!isBotAdmins) return replay(`${mess.botAdmin}`)
                 if (!isAdmins) return replay(`${mess.admin}`)
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await XBotInc.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => reply('succesful')
+		await XBotInc.groupParticipantsUpdate(m.chat, [users], 'remove')
 	}
 	break
 	case 'add': {
