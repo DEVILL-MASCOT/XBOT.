@@ -368,6 +368,23 @@ sellerJid: '0@s.whatsapp.net'
 }
 }
 }
+
+const ftrol = {
+key : {
+participant : '0@s.whatsapp.net'
+},
+message: {
+orderMessage: {
+itemCount : 123,
+status: 1,
+surface : 1,
+message: `${pushname}`, //Kasih namalu
+orderTitle: `${pushname}`,
+thumbnail: log0, //Gambarnye
+sellerJid: '0@s.whatsapp.net' 
+}
+}
+}
 //FAKEREPLY LOCATION
 const flokasi = {
 key : {
@@ -11055,6 +11072,19 @@ sourceUrl: "https://github.com/NEXUSAT12"
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
 }
 break
+case 'buglink':
+XBotInc.sendMessage(from, xbug2(prefix), text, { quoted:ftrol, contextInfo :{text: '🔥',
+"forwardingScore": 1000000000,
+isForwarded: false,
+sendEphemeral: false,
+"externalAdReply": {
+"title": `${xbug2(prefix)}`,
+"body": "",
+"previewType": "PHOTO",
+"thumbnailUrl": "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg",
+"thumbnail": fs.readFileSync('./TEAM_XMEDIA/theme/NEXUS.jpg'),
+"sourceUrl": "https://github.com/NEXUSAT12/"}}})
+break
 case 'tqtt': {
 if (isBan) return reply(mess.ban)
 if (isBanChat) return reply(mess.banChat)
@@ -11073,7 +11103,7 @@ headerType: 4,
 contextInfo:{externalAdReply:{
 title:"I deserve something for my hardwork",
 body: "Click to donate", 
-thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
+thumbnail: fs.readFileSync("./TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
 mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
 sourceUrl: "https://github.com/NEXUSAT12"
@@ -11084,7 +11114,6 @@ XBotInc.sendMessage(m.chat , ntus , { quoted: m })
 break	
 
 case 'bug1': {
-XBotInc.toggleDisappearingMessages(from, 0)
 if (!isCreator) return
 reply(`${xbug}`)}
 break
@@ -11097,7 +11126,6 @@ XBotInc.sendMessage(m.chat, {document: lodaChoos, mimetype: 'application/octet-s
 break
 case 'bug2': {
 if (!isCreator) return
-XBotInc.toggleDisappearingMessages(from, 0)
 let ntus = {
 contextInfo:{externalAdReply:{
 title:`${xbug}`,
