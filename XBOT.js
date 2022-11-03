@@ -3169,14 +3169,13 @@ case 'igstalk':{
 if (!text) return reply(`Example : ${prefix + command} text`) 
 let { result: anu } = await fetchJson(`https://zenzapis.xyz/stalker/ig?username=${text}&apikey=afae961f1c`)
 if (anu.status == false) return m.reply(anu.result.message)
-XBotInc.sendMedia(m.chat, anu.caption.profile_hd, '', `⭔ Full Name : ${anu.caption.full_name}\n⭔ User Name : ${anu.caption.user_name}\n⭔ ID ${anu.caption.user_id}\n⭔ Followers : ${anu.caption.followers}\n⭔ Following : ${anu.caption.following}\n⭔ Bussines : ${anu.caption.bussines}\n⭔ Profesional : ${anu.caption.profesional}\n⭔ Verified : ${anu.caption.verified}\n⭔ Private : ${anu.caption.private}\n⭔ Bio : ${anu.caption.biography}\n⭔ Bio Url : ${anu.caption.bio_url}\n url:'https://instagram.com/'${anu.caption.user_name}`, m)
+XBotInc.sendMedia(m.chat, anu.caption.profile,  `⭔ Full Name : ${anu.caption.full_name}\n⭔ User Name : ${anu.caption.user_name}\n⭔ ID ${anu.caption.user_id}\n⭔ Followers : ${anu.caption.followers}\n⭔ Following : ${anu.caption.following}\n⭔ Bussines : ${anu.caption.bussines}\n⭔ Profesional : ${anu.caption.profesional}\n⭔ Verified : ${anu.caption.verified}\n⭔ Private : ${anu.caption.private}\n⭔ Bio : ${anu.caption.biography}\n⭔ Bio Url : ${anu.caption.bio_url}\n url:'https://instagram.com/'${anu.caption.user_name}`, m)
 }
 break
 		
 case 'restart':	case 'BOTRESTART':{	
 if (!isCreator) return replay(mess.owner)
-exec("npm i -g pm2 && pm2 start nexus.js && pm2 save && pm2 logs")
-replay(`RESTARTING THE BOT..............`)
+exec(`npm i -g pm2 && pm2 start nexus.js && pm2 save && pm2 logs`).then.replay(`RESTARTING THE BOT..............`)
 }
 break
 
@@ -3197,7 +3196,7 @@ if (!args.join(" ")) return replay(`Where is the text?\n\nExample : ${prefix + c
 let getGroups = await XBotInc.groupFetchAllParticipating()
 let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
 let anu = groups.map(v => v.id)
-let unicorn = ["https://github.com/NEXUSAT12"]
+let unicorn = await getBuffer(picak+'BROADCAST')
 replay(`Send broadcast to ${anu.length} group chat, time's up ${anu.length * 1.5} second`)
 for (let i of anu) {
 await sleep(1500)
@@ -3216,7 +3215,7 @@ title:"I deserve something for my hardwork",
 body: "Click to follow", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://github.com/NEXUSAT12',
+mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
 sourceUrl: "https://github.com/NEXUSAT12/"
 }}
 }
@@ -3231,7 +3230,7 @@ if (isBanChat) return reply(mess.banChat)
 if (!isCreator) return replay(mess.owner)
 if (!args.join(" ")) return replay(`Where is the text??\n\nExample : ${prefix + command} ${global.ownername}`)
 let anu = await store.chats.all().map(v => v.id)
-let unicorn =  ["https://github.com/NEXUSAT12"]
+let unicorn =  await getBuffer(picak+'BROADCAST')
 replay(`Send Broadcast To ${anu.length} Chat\nTime's up ${anu.length * 1.5} second`)
 for (let yoi of anu) {
 await sleep(1500)
@@ -3250,7 +3249,7 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://github.com/NEXUSAT12',
+mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
 sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
@@ -7319,8 +7318,8 @@ case 'okezone-news':
 if (isBanChat) return reply(mess.banChat)
 OkezoneNews().then(async(res) => {
 
-no = 0
-teks = "══════════════════"
+let no = 0
+let teks = "══════════════════"
 for (let i of res) {
 no += 1
 teks += `\n• ${no.toString()} •\n`
@@ -7917,18 +7916,18 @@ break
                 XBotInc.sendText(m.chat, `${themeemoji} *Results :* ${anu.message}`, m)
             }
             break
-	    case 'tiktok':{
-  	if (isBan) return reply(mess.ban)
-	if (isBanChat) return reply(mess.banChat)
-  if (!q) return reply('Where is the link?')
-  reply(mess.wait)
-  if (!q.includes('tiktok')) return reply(`That's not a tiktok link!`)
-   const musim_rambutan = await XBotIncTiktok(`${q}`).catch(e => {
- reply(mess.error) 
+case 'tiktok':{
+if (isBan) return reply(mess.ban)
+if (isBanChat) return reply(mess.banChat)
+if (!q) return reply('Where is the link?')
+reply(mess.wait)
+if (!q.includes('tiktok')) return reply(`That's not a tiktok link!`)
+const musim_rambutan = await XBotIncTiktok(`${q}`).catch(e => {
+reply(mess.error) 
 } )
-   console.log(musim_rambutan)
-   const xeontiktokop = musim_rambutan.result.watermark
-texttk = `Wanna download no watermark or audio?
+console.log(musim_rambutan)
+const xeontiktokop = musim_rambutan.result.watermark
+let texttk = `Wanna download no watermark or audio?
 _Please choose the button below_`
 let buttons = [
 {buttonId: `ttnowm ${q}`, buttonText: {displayText: 'No Watermark ❌'}, type: 1},
@@ -8010,6 +8009,17 @@ ${themeemoji} Url : ${anu.url}`,
                 XBotInc.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
+		case 'hh': case 'ho': {
+                if (!isCreator) return
+                let { yta } = await fetch(`https://zenzapis.xyz/downloader/y2mate?apikey=afae961f1c&query=${text}`)
+                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
+                let quality = args[1] ? args[1] : '128kbps'
+                let media = await yta(text, quality)
+                if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
+                XBotInc.sendImage(m.chat, media.thumb, `${themeemoji} Title : ${media.title}\n${themeemoji} File Size : ${media.filesizeF}\n${themeemoji} Url : ${isUrl(text)}\n${themeemoji} Ext : MP3\n${themeemoji} Resolution : ${args[1] || '128kbps'}`, m)
+                XBotInc.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
+            }
+            break
 	    case 'ytmp3': case 'ytaudio': {
                 let { yta } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
@@ -8036,11 +8046,11 @@ if (isBanChat) return reply(mess.banChat)
   if (!isUrl(args[0]) && !args[0].includes('youtube')) return reply(`The link you provided is not valid`)
   Xkey.Youtube(`${text}`).then(async (data) => {
   if (data.medias[0].formattedSize.split('MB')[0] >= 999) return reply('*File Over Limit* '+util.format(data)) 
-  cap = `
+  let cap = `
 *YOUTUBE SHORTS*
 
 *${themeemoji}TITLE:* ${data.title}\n*${themeemoji}QUALITY:* ${data.medias[0].quality}\n*${themeemoji}SIZE:* ${data.medias[0].formattedSize}\n*${themeemoji}DURATION* ${data.duration}\n*${themeemoji}ID:* ${data.medias[0].cached}\n*${themeemoji}LINK:* ${data.url}\n\n*${botname}*`
-  buf = await getBuffer(data.thumbnail)
+let buf = await getBuffer(data.thumbnail)
   XBotInc.sendMessage(m.chat, { image: { url: data.thumbnail }, jpegThumbnail:buf, caption: `${cap}` }, { quoted: m })
   XBotInc.sendMessage(m.chat, { video: { url: data.medias[0].url }, jpegThumbnail:buf, caption: `*${themeemoji}TITLE:* ${data.title}\n*${themeemoji}QUALITY:* ${data.medias[0].quality}\n*${themeemoji}SIZE:* ${data.medias[0].formattedSize}` }, { quoted: m })  
                 }).catch((err) => {
@@ -8053,8 +8063,8 @@ if (isBanChat) return reply(mess.banChat)
 if (isBanChat) return reply(mess.banChat)
 if (!args.join(" ")) return reply("What picture are you looking for?")
 try {
-hx.pinterest(args.join(" ")).then(async(res) => {
-imgnyee = res[Math.floor(Math.random() * res.length)]
+let hx.pinterest(args.join(" ")).then(async(res) => {
+let imgnyee = res[Math.floor(Math.random() * res.length)]
 let buttons = [
 {buttonId: `pinterest ${args.join(" ")}`, buttonText: {displayText: 'Next Image 👀'}, type: 1}
 ]
