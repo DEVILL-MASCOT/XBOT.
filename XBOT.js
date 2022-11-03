@@ -1,4 +1,5 @@
 require('./settings')
+require('./lib/XBOT.js')
 const { WAConnection: _WAConnection, BufferJSON, WA_DEFAULT_EPHEMERAL, generateWAMessageFromContent, proto, generateWAMessageContent, generateWAMessage, prepareWAMessageMedia, areJidsSameUser, getContentType, ChatModification , GroupSettingChange, waChatKey } = require('@adiwajshing/baileys')
 const fs = require('fs')
 const util = require('util')
@@ -2275,7 +2276,7 @@ if (isBanChat) return reply(mess.banChat)
                 if (!isBotAdmins) return replay(`${mess.botAdmin}`)
                 if (!isAdmins) return replay(`${mess.admin}`)
 		let users = m.mentionedJid[0] ? m.mentionedJid[0] : m.quoted ? m.quoted.sender : text.replace(/[^0-9]/g, '')+'@s.whatsapp.net'
-		await XBotInc.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => reply(jsonformat(res))).catch((err) => reply(jsonformat(err)))
+		await XBotInc.groupParticipantsUpdate(m.chat, [users], 'remove').then((res) => reply('succesful')
 	}
 	break
 	case 'add': {
@@ -3245,9 +3246,9 @@ case 'bc': case 'broadcast': case 'bcall': {
 if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
 if (!isCreator) return replay(mess.owner)
+let unicorn =  await getBuffer(picak+'BROADCAST')
 if (!args.join(" ")) return replay(`Where is the text??\n\nExample : ${prefix + command} ${global.ownername}`)
 let anu = await store.chats.all().map(v => v.id)
-let unicorn =  await getBuffer(picak+'BROADCAST')
 replay(`Send Broadcast To ${anu.length} Chat\nTime's up ${anu.length * 1.5} second`)
 for (let yoi of anu) {
 await sleep(1500)
@@ -4860,7 +4861,7 @@ case 'sound160':
 case 'sound161':
 if (isBan) return reply(mess.ban)
 	if (isBanChat) return reply(mess.banChat)
-xeony_buffer = await getBuffer(`https://github.com/DGXeon/Tiktokmusic-API/raw/master/tiktokmusic/${command}.mp3`)
+let xeony_buffer = await getBuffer(`https://github.com/NEXUSAT12/Xsound-api/raw/master/tiktokmusic/${command}.mp3`)
 await XBotInc.sendMessage(m.chat, { audio: xeony_buffer, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
 break
 
@@ -8587,7 +8588,7 @@ ${cpus.map((cpu, i) => `${i + 1}. ${cpu.model.trim()} (${cpu.speed} MHZ)\n${Obje
             }
             break
             case 'owner': case 'creator': {
-                XBotInc.sendContact(m.chat, global.vcardowner, m)
+                XBotInc.sendContact(m.chat, global.powner, m)
             }
             break
   case 'setmenu': {
