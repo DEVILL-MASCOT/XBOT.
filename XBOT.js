@@ -3694,7 +3694,7 @@ https://instagram.com/at.__010/
 https://t.me/@kim_Ayush
 ⪼𝖲𝖾𝖾 𝗒𝖺𝗁 💘`
 let img = 'https://i.pinimg.com/236x/80/09/2e/80092ec2f4b1937aeea647e56dd7800f.jpg',
- var wbuttsss = [
+ let  wbuttsss = [
         {buttonId: `${prefix}owner`, buttonText: {displayText: `owner✨`}, type: 1},
         ]
       let buttonsssMessages = {
