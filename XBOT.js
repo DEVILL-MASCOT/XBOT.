@@ -544,7 +544,7 @@ const reply = (teks) => {
     if (!isCmd && !m.isGroup){
     const botreply = await axios.get(`https://api.simsimi.net/v2/?text=${budy}&lc=en`)
     let txt = `${botreply.data.success}`
-    m.reply(txt)
+    m.reply(txt,{quoted:m})
     }
 	
 //auto read whatsapp status
@@ -3573,12 +3573,38 @@ if (isBanChat) return reply(mess.banChat)
             reply(db)
         }
         break
-case 'bts':
+case 'bts':{
 if (isBan) return reply(mess.ban)
 	if (isBanChat) return reply(mess.banChat)
-teks = `Here you go!`
-buffer = `https://api.dapuhy.xyz/api/randomimage/batues?apikey=0gly81wDky`
-XBotInc.sendMessage(from, {image:{url:buffer}, caption:"Here you go!"}, {quoted:m})
+let teks = `Here you go!😎`
+let buffer = ["https://wallpapercave.com/wp/wp9207693.jpg",
+    "https://wallpapercave.com/wp/wp3730062.jpg",
+    "https://wallpapercave.com/wp/wp10455472.jpg",
+    "https://wallpapercave.com/wp/wp4549800.png",
+    "https://wallpapercave.com/wp/wp8014813.jpg",
+    "https://wallpapercave.com/wp/wp10455530.jpg",
+    "https://wallpapercave.com/wp/wp10455562.jpg",
+    "https://wallpapercave.com/wp/wp8289440.jpg",
+    "https://wallpapercave.com/wp/wp8289447.jpg",
+    "https://wallpapercave.com/wp/wp3819815.jpg",
+    "https://wallpapercave.com/wp/wp4364068.jpg",
+    "https://wallpapercave.com/wp/wp8741216.jpg",
+    "https://wallpapercave.com/wp/wp8741330.jpg",
+    "https://wallpapercave.com/wp/wp4339969.jpg",
+    "https://wallpapercave.com/wp/wp5643737.jpg",
+    "https://wallpapercave.com/wp/wp7974456.jpg",
+    "https://wallpapercave.com/wp/wp7712431.jpg",
+    "https://wallpapercave.com/wp/wp5016072.jpg",
+    "https://wallpapercave.com/wp/wp5157519.jpg",
+    "https://wallpapercave.com/wp/wp5157551.jpg",
+    "https://wallpapercave.com/wp/wp5157543.jpg",
+    "https://wallpapercave.com/wp/wp8495265.png",
+    "https://wallpapercave.com/wp/wp4889423.jpg",
+    "https://wallpapercave.com/uwp/uwp1794162.jpeg",
+    "https://wallpapercave.com/wp/wp5016696.jpg"]
+let img2 = buffer[Math.floor(Math.random() *buffer.length)]
+XBotInc.sendMessage(from, {image:img2, caption:teks}, {quoted:m})
+}
 break
 case 'wallneon': case 'wallrandom': case 'wallcode': case 'wallpubg': case 'wallml': 	
 try{
@@ -3645,6 +3671,32 @@ let spgif = await GIFBufferToVideoBuffer(spbuff)
         await XBotInc.sendMessage(m.chat,{video: spgif, gifPlayback:true},{ quoted:m }).catch(err => {
                     return reply('Error!')
                                     })
+break
+case 'ownerinfo': {
+let reply = `Hello  !🍃This is ✴XBOT✴ , And here is the info about my owners talk with them nicely and dont forget to follow their instagram.
+
+📫𝙒𝙝𝙖𝙩𝙨𝘼𝙥𝙥;
+Wa.me/+918130784851
+⭕𝙂𝙞𝙩𝙝𝙪𝙗;
+https://github.com/NEXUSAT12/
+📮𝙄𝙣𝙨𝙩𝙖𝙜𝙧𝙖𝙢;
+https://instagram.com/at.__010/
+🕸𝙏𝙚𝙡𝙚𝙜𝙧𝙖𝙢;
+https://t.me/@kim_Ayush
+⪼𝖲𝖾𝖾 𝗒𝖺𝗁 💘`
+let img = ["https://i.pinimg.com/236x/80/09/2e/80092ec2f4b1937aeea647e56dd7800f.jpg"]
+ var wbuttsss = [
+        {buttonId: `${prefix}owner`, buttonText: {displayText: `owner✨`}, type: 1},
+        ]
+      let buttonsssMessages = {
+      image: img,
+      caption:  reply,
+      footer: `${global.botname}`,
+      buttons: wbuttsss,
+      headerType: 4
+      }     
+XBotInc.sendMessage(m.chat, buttonsssMessages,{ quoted:m })
+}
 break
 case 'blowjobgif': case 'bj' :
    if (isBan) return reply(mess.ban)	 			
@@ -8026,24 +8078,12 @@ ${themeemoji} Url : ${anu.url}`,
                 XBotInc.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
-		case 'hh': case 'ho': {
-                if (!isCreator) return
-                let { yta } = await fetch(`https://zenzapis.xyz/downloader/y2mate?apikey=afae961f1c&query=${text}`)
-                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
-                let quality = args[1] ? args[1] : '128kbps'
-                let media = await yta(text, quality)
-                if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
-                XBotInc.sendImage(m.chat, media.thumb, `${themeemoji} Title : ${media.title}\n${themeemoji} File Size : ${media.filesizeF}\n${themeemoji} Url : ${isUrl(text)}\n${themeemoji} Ext : MP3\n${themeemoji} Resolution : ${args[1] || '128kbps'}`, m)
-                XBotInc.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
-            }
-            break
 	    case 'ytmp3': case 'ytaudio': {
                 let { yta } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
                 let quality = args[1] ? args[1] : '128kbps'
                 let media = await yta(text, quality)
                 if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
-                XBotInc.sendImage(m.chat, media.thumb, `${themeemoji} Title : ${media.title}\n${themeemoji} File Size : ${media.filesizeF}\n${themeemoji} Url : ${isUrl(text)}\n${themeemoji} Ext : MP3\n${themeemoji} Resolution : ${args[1] || '128kbps'}`, m)
                 XBotInc.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
             }
             break
@@ -9642,6 +9682,7 @@ const allmenu =  `╔═══════➻「 𝓸𝔀𝓷𝓮𝓻 」
 ╠🔥${prefix}𝙳𝚘𝚗𝚊𝚝𝚎
 ╠🔥${prefix}𝚁𝚎𝚚𝚞𝚎𝚜𝚝
 ╠🔥${prefix}𝚁𝚎𝚙𝚘𝚛𝚝 [𝙱𝚞𝚐]
+╠🔥${prefix}ownerinfo
 ╽
 ╚┅┅┅┅┅┅┅༻` 
 let buons = [
