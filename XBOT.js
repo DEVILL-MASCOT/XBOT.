@@ -3693,15 +3693,16 @@ https://instagram.com/at.__010/
 🕸𝙏𝙚𝙡𝙚𝙜𝙧𝙖𝙢;
 https://t.me/@kim_Ayush
 ⪼𝖲𝖾𝖾 𝗒𝖺𝗁 💘`
-let img = 'https://i.pinimg.com/236x/80/09/2e/80092ec2f4b1937aeea647e56dd7800f.jpg',
- let  wbuttsss = [
-        {buttonId: `${prefix}owner`, buttonText: {displayText: `owner✨`}, type: 1},
+let img = 'https://i.pinimg.com/236x/80/09/2e/80092ec2f4b1937aeea647e56dd7800f.jpg'
+let buttins = [
+        {buttonId: `owner`, buttonText: {displayText: `owner✨`}, type: 1},
+	{buttonId: `sc`, buttonText: {displayText: `support ✨`}, type: 1},
         ]
       let buttonsssMessages = {
       image:img,
       caption:reply,
       footer: `${global.botname}`,
-      buttons: wbuttsss,
+      buttons: buttins,
       headerType: 4
       }     
 XBotInc.sendMessage(m.chat, buttonsssMessages,{ quoted:m })
