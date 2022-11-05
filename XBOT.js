@@ -3577,35 +3577,44 @@ case 'bts':{
 if (isBan) return reply(mess.ban)
 	if (isBanChat) return reply(mess.banChat)
 let teks = `Here you go!😎`
-let buffer = ["https://wallpapercave.com/wp/wp9207693.jpg",
-    "https://wallpapercave.com/wp/wp3730062.jpg",
-    "https://wallpapercave.com/wp/wp10455472.jpg",
-    "https://wallpapercave.com/wp/wp4549800.png",
-    "https://wallpapercave.com/wp/wp8014813.jpg",
-    "https://wallpapercave.com/wp/wp10455530.jpg",
-    "https://wallpapercave.com/wp/wp10455562.jpg",
-    "https://wallpapercave.com/wp/wp8289440.jpg",
-    "https://wallpapercave.com/wp/wp8289447.jpg",
-    "https://wallpapercave.com/wp/wp3819815.jpg",
-    "https://wallpapercave.com/wp/wp4364068.jpg",
-    "https://wallpapercave.com/wp/wp8741216.jpg",
-    "https://wallpapercave.com/wp/wp8741330.jpg",
-    "https://wallpapercave.com/wp/wp4339969.jpg",
-    "https://wallpapercave.com/wp/wp5643737.jpg",
-    "https://wallpapercave.com/wp/wp7974456.jpg",
-    "https://wallpapercave.com/wp/wp7712431.jpg",
-    "https://wallpapercave.com/wp/wp5016072.jpg",
-    "https://wallpapercave.com/wp/wp5157519.jpg",
-    "https://wallpapercave.com/wp/wp5157551.jpg",
-    "https://wallpapercave.com/wp/wp5157543.jpg",
-    "https://wallpapercave.com/wp/wp8495265.png",
-    "https://wallpapercave.com/wp/wp4889423.jpg",
-    "https://wallpapercave.com/uwp/uwp1794162.jpeg",
-    "https://wallpapercave.com/wp/wp5016696.jpg"]
-let img2 = buffer[Math.floor(Math.random() *buffer.length)]
-XBotInc.sendMessage(from, {image:img2, caption:teks}, {quoted:m})
-}
-break
+let buffer = [	"https://wallpapercave.com/wp/wp9207693.jpg",
+	      	"https://wallpapercave.com/wp/wp3730062.jpg",
+	      	"https://wallpapercave.com/wp/wp10455472.jpg",
+    	     	"https://wallpapercave.com/wp/wp4549800.png",
+    		"https://wallpapercave.com/wp/wp8014813.jpg",
+    		"https://wallpapercave.com/wp/wp10455562.jpg",
+    		"https://wallpapercave.com/wp/wp8289440.jpg",
+    		"https://wallpapercave.com/wp/wp8289447.jpg",
+    		"https://wallpapercave.com/wp/wp3819815.jpg",
+    		"https://wallpapercave.com/wp/wp4364068.jpg",
+    		"https://wallpapercave.com/wp/wp8741216.jpg",
+    		"https://wallpapercave.com/wp/wp8741330.jpg",
+    		"https://wallpapercave.com/wp/wp4339969.jpg",
+    		"https://wallpapercave.com/wp/wp5643737.jpg",
+    		"https://wallpapercave.com/wp/wp7974456.jpg",
+    		"https://wallpapercave.com/wp/wp7712431.jpg",
+    		"https://wallpapercave.com/wp/wp5016072.jpg",
+    		"https://wallpapercave.com/wp/wp5157519.jpg",
+    		"https://wallpapercave.com/wp/wp5157551.jpg",
+    		"https://wallpapercave.com/wp/wp5157543.jpg",
+    		"https://wallpapercave.com/wp/wp8495265.png",
+    		"https://wallpapercave.com/wp/wp4889423.jpg",
+    		"https://wallpapercave.com/uwp/uwp1794162.jpeg",
+    		"https://wallpapercave.com/wp/wp5016696.jpg",]
+let img2 = buffer[Math.floor(Math.random()*buffer.length)]
+ let buttons = [
+                    {buttonId: `bts`, buttonText: {displayText: 'Next Image'}, type: 1}
+                ]
+                let buttonMessage = {
+                    image: { url: img2},
+                    caption: `Here you go!`,
+                    footer: `${botname}`,
+                    buttons: buttons,
+                    headerType: 4
+                }
+                XBotInc.sendMessage(m.chat, buttonMessage, { quoted: m })
+            }
+            break
 case 'wallneon': case 'wallrandom': case 'wallcode': case 'wallpubg': case 'wallml': 	
 try{
 	   if (isBan) return reply(mess.ban)
@@ -3684,13 +3693,13 @@ https://instagram.com/at.__010/
 🕸𝙏𝙚𝙡𝙚𝙜𝙧𝙖𝙢;
 https://t.me/@kim_Ayush
 ⪼𝖲𝖾𝖾 𝗒𝖺𝗁 💘`
-let img = ["https://i.pinimg.com/236x/80/09/2e/80092ec2f4b1937aeea647e56dd7800f.jpg"]
+let img = 'https://i.pinimg.com/236x/80/09/2e/80092ec2f4b1937aeea647e56dd7800f.jpg',
  var wbuttsss = [
         {buttonId: `${prefix}owner`, buttonText: {displayText: `owner✨`}, type: 1},
         ]
       let buttonsssMessages = {
-      image: img,
-      caption:  reply,
+      image:img,
+      caption:reply,
       footer: `${global.botname}`,
       buttons: wbuttsss,
       headerType: 4
