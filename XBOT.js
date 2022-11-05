@@ -543,8 +543,8 @@ const reply = (teks) => {
 ///////auto chat bot///////	
     if (!isCmd && !m.isGroup){
     const botreply = await axios.get(`https://api.simsimi.net/v2/?text=${budy}&lc=en`)
-    let txt = `${botreply.data.success}`
-    m.reply(txt,{quoted:m})
+    let txt = `${botreply.data.cnt}`
+    XBotInc.sendMessage(txt, { quoted: m })
     }
 	
 //auto read whatsapp status
@@ -1231,6 +1231,14 @@ replay(`Successfully unbanned the user`)
 replay("Error")
 }
 }
+break
+		
+case 'chatbot': case 'ch': {
+if (!text) return replay(`Enter Query Text!`)
+let botreply = await axios.get(`https://api.simsimi.net/v2/?text=${text}&lc=en`)
+    let txt = `${botreply.data.cnt}`
+    XBotInc.sendMessage(txt, { quoted: m })
+    }
 break
 	
         case 'inventori': case 'inventory': case 'profile':{
@@ -3699,7 +3707,7 @@ let buttins = [
 	{buttonId: `sc`, buttonText: {displayText: `support ✨`}, type: 1},
         ]
       let buttonsssMessages = {
-      image:img,
+      image:{url:img},
       caption:reply,
       footer: `${global.botname}`,
       buttons: buttins,
