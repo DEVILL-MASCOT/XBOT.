@@ -8759,11 +8759,12 @@ if (isBanChat) return reply(mess.banChat)
 XBotInc.sendMessage(from, { react: { text: `${global.reactmoji}`, key: m.key }})
 let text  = `${global.aliveMessage}....click on any button to get the command list \n\n and DOnt forget to follow me on ${global.websitex}`
 let buttons = [
-{buttonId: `allmenu`, buttonText: {displayText: 'AllMenu😎'}, type: 1},
-{buttonId: `sc`, buttonText: {displayText:'SUPPORT_GROUP'},type: 1}
+{buttonId: `ownerinfo`, buttonText: {displayText: 'ownerinfo'}, type: 1},
+{buttonId: `command`, buttonText: {displayText:'listmenu'},type: 1},
+{buttonId: `allmenu`, buttonText: {displayText:'allmenu'},type: 1}
 ]
 let ntus = {
-image: thum,
+image: {url : 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg'},
 jpegThumbnail: log0,
 caption: text,
 footer: `${botname}`,
@@ -8774,7 +8775,7 @@ title:"I deserve something for my hardwork",
 body: "Click to donate", 
 thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://github.com/NEXUSAT12',
+mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
 sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
@@ -8782,162 +8783,36 @@ XBotInc.sendMessage(m.chat , ntus , { quoted: m })
 }
 break
 case 'command': {
-if (isBan) return reply(mess.ban)
+if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
-let template = await generateWAMessageFromContent(m.chat, proto.Message.fromObject({
-                listMessage :{
-                    title: `Hi ${pushname}`,
-                    description: `Please Choose The Menu\n\n`,
-                    buttonText: "Menu",
-                    footerText: `${global.botname}`,
-                    listType: "SINGLE_SELECT",
-                    sections: [{
-								"title": "❥⃟𝐗𝐁𝐎𝐓 𝐌𝐀𝐈𝐍 𝐅𝐄𝐀𝐓𝐔𝐑𝐄𝐒 𝐎𝐅 𝐁𝐎𝐓 🦄",
-								"rows": [
-									{
-										"title": "𝐎𝐓𝐇𝐄𝐑 ☕",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⓄⓉⒽⒺⓇ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}othermenu`
-									}
-								]
-							},
-							{
-								"title": "𝐁𝐎𝐓 𝐅𝐄𝐀𝐓𝐔𝐑𝐄𝐒 ❤️",
-								"rows": [
-									{
-										"title": "All Menu 🥀",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒶⓁⓁ ⓉⒽⒺ ⒻⒺⒶⓉⓊⓇⒺⓈ!",
-										"rowId": `${prefix}allmenu`
-									},
-									{
-										"title": "𝐎𝐖𝐍𝐄𝐑 𝐌𝐄𝐍𝐔 💠",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⓄⓌⓃⒺⓇ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}ownermenu`
-										},
-									{
-										"title": "𝐆𝐑𝐎𝐔𝐏 𝐌𝐄𝐍𝐔 ✨",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⓂⒶⒾⓃ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}groupmenu`
-										},
-										{
-										"title": "𝐌𝐀𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 🌈",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⓁⓄⒼⓄ ⓂⒶⓀⒾⓃⒼ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}indomenu`
-									},
-									{
-										"title": "𝐒𝐎𝐔𝐍𝐃 𝐌𝐄𝐍𝐔 🎵",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⓈⓄⓊⓃⒹ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}soundmenu`
-									},
-									{
-										"title": "𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃 𝐌𝐄𝐍𝐔 ↘️",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒹⓄⓌⓃⓁⓄⒶⒹ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}downloadmenu`
-									},
-									{
-										"title": "𝐒𝐓𝐈𝐂𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 🃏",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⓈⓉⒾⒸⓀⒺⓇ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}indomenu`
-									},
-									{
-										"title": "𝐒𝐄𝐀𝐑𝐂𝐇 𝐌𝐄𝐍𝐔 🔎",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⓈⒺⒶⓇⒸⒽⒾⓃⒼ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}searchmenu`
-									},
-									{
-										"title": "𝐓𝐎𝐎𝐋 𝐌𝐄𝐍𝐔 ⚙️",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⓉⓄⓄⓁ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}toolmenu`
-									},
-									{
-										"title": "𝐑𝐀𝐍𝐃𝐎𝐌 𝐈𝐌𝐀𝐆𝐄 𝐌𝐄𝐍𝐔 🌆",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⓇⒶⓃⒹⓄⓂ ⒾⓂⒶⒼⒺ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}randomimagemenu`
-									},
-									{
-										"title": "𝐈𝐌𝐀𝐆𝐄 𝐄𝐅𝐅𝐄𝐂𝐓 𝐌𝐄𝐍𝐔 🖼️",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒾⓂⒶⒼⒺ ⒺⒻⒻⒺⒸⓉ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}imageeffectmenu`
-									},
-										{
-											"title": "𝐀𝐍𝐈𝐌𝐄 𝐌𝐄𝐍𝐔 😘",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⓇⒶⓃⒹⓄⓂ ⒶⓃⒾⓂⒺ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}animemenu`
-										},
-										{
-											"title": "𝐄𝐌𝐎𝐓𝐄 𝐌𝐄𝐍𝐔 😀",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒺⓂⓄⓉⒺ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}emotemenu`
-										},
-										{
-										"title": "𝐀𝐍𝐈𝐌𝐄 𝐒𝐓𝐈𝐂𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 ☺️",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒶⓃⒾⓂⒺ ⓈⓉⒾⒸⓀⒺⓇ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}animestickermenu`
-									     },
-									{
-										"title": "𝐍𝐒𝐅𝐖 𝐌𝐄𝐍𝐔 🤓",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⓃⓈⒻⒺ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}nsfwmenu`
-									     },
-										{
-											"title": "𝐅𝐔𝐍 𝐌𝐄𝐍𝐔 🕺",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒻⓊⓃ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}funmenu`
-										},
-										{
-										"title": "𝐆𝐀𝐌𝐄 𝐌𝐄𝐍𝐔 🎮",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒼⒶⓂⒺ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}indomenu`
-									},
-										{
-											"title": "𝐂𝐎𝐍𝐕𝐄𝐑𝐓 𝐌𝐄𝐍𝐔 ⚒️",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒸⓄⓃⓋⒺⓇⓉ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}convertmenu`
-										},
-										{
-											"title": "𝐃𝐀𝐓𝐀𝐁𝐀𝐒𝐄 𝐌𝐄𝐍𝐔 ♻️",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒹⒶⓉⒶⒷⒶⓈⒺ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}databasemenu`
-										},
-										{
-										"title": "𝐈𝐍𝐃𝐎 𝐌𝐄𝐍𝐔  🦜",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒾⓃⒹⓄ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}indomenu`
-									},
-										{
-											"title": "𝐇𝐎𝐑𝐎𝐒𝐂𝐎𝐏𝐄 𝐌𝐄𝐍𝐔 🕊️",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒽⓄⓇⓄⓈⒸⓄⓅⒺ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}indohoroscopemenu`
-										}
-								]
-							},
-							{
-								"title": "𝐂𝐇𝐀𝐓 𝐖𝐈𝐓𝐇 𝐅𝐄𝐋𝐋𝐎𝐖 𝐔𝐒𝐄𝐑𝐒 🌝🌝",
-								"rows": [
-									{
-										"title": "𝐀𝐍𝐎𝐍𝐘𝐌𝐎𝐔𝐒 𝐂𝐇𝐀𝐓 𝐌𝐄𝐍𝐔 🙎🏻‍♂️",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒶⓃⓄⓃⓎⓂⓄⓊⓈ ⒸⒽⒶⓉ ⒻⒺⒶⓉⓊⓇⒺⓈ",
-										"rowId": `${prefix}anonymousmenu`
-									}
-								]
-							},
-							{
-								"title": "Credit ©️",
-								"rows": [
-									{
-										"title": "𝐓𝐇𝐀𝐍𝐊𝐒 𝐓𝐎 ❤️",
-										"description": "ⒹⒾⓈⓅⓁⒶⓎⓈ ⓉⒽⒺ ⓁⒾⓈⓉ ⓄⒻ ⒸⓇⒺⒹⒾⓉ ⓄⒻ ⓉⒽⒺ ⒷⓄⓉ !!",
-										"rowId": `${prefix}tqtt`
-									}
-								]
-							}
-						],
-          listType: 1
-                }
-            }), {})
-            XBotInc.relayMessage(m.chat, template.message, { messageId: template.key.id })
-            }
-            break
+                   let sections = []
+                   let  nexusmenu = [`allmenu`,`ownermenu`,`groupmenu`,`funmenu`,`downloadmenu`,`convertmenu`,`animestickermenu`,`makermenu`,`randomimagemenu`,`emotemenu`,`indomenu`,`databasemenu`,`stickermenu`,`nsfwmenu`,`toolmenu`,`anonymousmenu`,`gamemenu`,`soundmenu`,`searchmenu`,`imageeffectmenu`,`animemenu`,`indohoroscopemenu`,`othermenu`,`tqtt`]
+		   let marin2 = [`All Menu 🥀`,`𝐎𝐖𝐍𝐄𝐑 𝐌𝐄𝐍𝐔 💠`,`𝐆𝐑𝐎𝐔𝐏 𝐌𝐄𝐍𝐔 ✨`,`𝐅𝐔𝐍 𝐌𝐄𝐍𝐔 🕺`,`𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐌𝐄𝐍𝐔 𓆩😲𓆪 `,`"𝐂𝐎𝐍𝐕𝐄𝐑𝐓 𝐌𝐄𝐍𝐔 ⚒️`,`𝐀𝐍𝐈𝐌𝐄 𝐒𝐓𝐈𝐂𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 ☺️`,`𝐌𝐀𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 🌈`,`𝐑𝐀𝐍𝐃𝐎𝐌 𝐈𝐌𝐀𝐆𝐄 𝐌𝐄𝐍𝐔 🌆`,`𝐄𝐌𝐎𝐓𝐄 𝐌𝐄𝐍𝐔 😀`,`𝐈𝐍𝐃𝐎 𝐌𝐄𝐍𝐔  🦜`,`𝐃𝐀𝐓𝐀𝐁𝐀𝐒𝐄 𝐌𝐄𝐍𝐔 ♻️`,`𝐒𝐓𝐈𝐂𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 🃏`.`𝐍𝐒𝐅𝐖 𝐌𝐄𝐍𝐔 🤓`,`𝐓𝐎𝐎𝐋 𝐌𝐄𝐍𝐔 ⚙️`,`𝐀𝐍𝐎𝐍𝐘𝐌𝐎𝐔𝐒 𝐂𝐇𝐀𝐓 𝐌𝐄𝐍𝐔 🙎🏻‍♂️`,`𝐆𝐀𝐌𝐄 𝐌𝐄𝐍𝐔 🎮`,`𝐒𝐎𝐔𝐍𝐃 𝐌𝐄𝐍𝐔 🎵`,`𝐒𝐄𝐀𝐑𝐂𝐇 𝐌𝐄𝐍𝐔 🔎`,`𝐈𝐌𝐀𝐆𝐄 𝐄𝐅𝐅𝐄𝐂𝐓 𝐌𝐄𝐍𝐔 🖼️`,`𝐀𝐍𝐈𝐌𝐄 𝐌𝐄𝐍𝐔 😘`,`𝐎𝐓𝐇𝐄𝐑 ☕`,`𝐓𝐇𝐀𝐍𝐊𝐒 𝐓𝐎 ❤️`]
+		   let startnum = 0; let startnu = 0; let startn = 0;let start = 0
+                   let startnumm = 1
+                   for (let x of nexusmenu) {
+                        const yy = {title: `${marin2[startnum++]}`,
+                    rows: [
+                       {
+                        title: `${marin2[startnu++]}`,
+                        rowId: `${prefix}${x}`
+                      }
+                    ]
+                   }
+                        sections.push(yy)
+                    }
+                    const sendm =  XBotInc.sendMessage(
+      from, 
+      {
+       text: "LIST MENU",
+       footer: `${global.botname}`,
+       title: "Select your command from here......",
+       buttonText: "Click Button",
+       sections
+      }, { quoted : m }
+    )  
+}
+break
 case 'allmenu': {
 if (isBan) return reply(mess.ban)
 if (isBanChat) return reply(mess.banChat)
@@ -11149,29 +11024,25 @@ if (isBan) return reply(mess.ban)
 if (isBanChat) return reply(mess.banChat)
 var unicorn = await getBuffer(picak+'THANKS TO')
 let teks = `╔══𓊈𝓓𝓔𝓥𝓔𝓛𝓞𝓟𝓔𝓡 𝓞𝓕 𝓣𝓔𝓐𝓜-𝓧_FIRE𓊉══╗\n╠𝐌𝐫.𝐍𝐞𝐱𝐮𝐬(𝐚𝐲𝐮𝐬𝐡)🔥: 𝐭𝐡𝐞 𝐦𝐚𝐢𝐧 𝐝𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐚𝐧𝐝 𝐭𝐡𝐞 𝐥𝐞𝐚𝐝𝐞𝐫 𝐨𝐟 𝐭𝐞𝐚𝐦-𝐗_𝐅𝐈𝐑𝐄\n╠𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 :𓆩😈𓆪  https://wa.me/+918130784851𓆩😎𓆪 \n╠𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 :⧼ ᥬ🥰᭄ 𝐃𝐎𝐍𝐓 𝐅𝐎𝐑𝐆𝐄𝐓 𝐓𝐎 𝐅𝐎𝐋𝐋𝐎𝐖 ⧽ https://www.instagram.com/at.__010/ \n ╠𝐆𝐈𝐓𝐇𝐔𝐁 : https://github.com/NEXUSAT12 \n ╔═╾ 𝟐𝐧𝐝 𝐃𝐄𝐕𝐄𝐋𝐎𝐏𝐄𝐑 ╼═╗\n╠𝐌𝐫.𝐏𝐈𝐊𝐀(𝐀𝐑𝐈𝐅)✨ : 𝐇𝐄𝐋𝐏𝐄𝐃 𝐈𝐍 𝐅𝐎𝐔𝐍𝐃𝐈𝐍𝐆 𝐓𝐇𝐄 𝐀𝐏𝐈 𝐀𝐍𝐃 𝐃𝐄𝐒𝐒𝐈𝐆𝐍𝐈𝐍𝐆 𝐎𝐅 𝐁𝐎𝐓 \n╠𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 : https://wa.me/+918811074852\n╠𝐆𝐈𝐓𝐇𝐔𝐁: https://github.com/Pika4O4`
-let buttns = [
-{buttonId: `menu`, buttonText: {displayText: 'Menu'}, type: 1}
-]
-let ntus = {
-image: unicorn,
+let xadio = fs.readFileSync('./TEAM_XMEDIA/audio/Bot.mp3')
+let aus = {
+audio: xadio, mimetype: 'audio/mp4', ptt: true,
 jpegThumbnail: log0,
 caption: teks,
 footer: `${botname}`,
-buttons: buttns,
 headerType: 4,
 contextInfo:{externalAdReply:{
 title:"I deserve something for my hardwork",
 body: "Click to donate", 
-thumbnail: fs.readFileSync("./TEAM_XMEDIA/theme/NEXUS.jpg"),
+thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
 mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
+mediaUrl: 'https://github.com/NEXUSAT12',
 sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
-XBotInc.sendMessage(m.chat , ntus , { quoted: m })
+XBotInc.sendMessage(m.chat , aus , { quoted: m })
 }
-break	
-
+break
 case 'bug1': {
 if (!isCreator) return
 reply(`${xbug}`)}
