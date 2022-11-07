@@ -3190,11 +3190,23 @@ if (isBanChat) return reply(mess.banChat)
     )  
 }
   break
-case 'igstalk':{
-if (!text) return reply(`Example : ${prefix + command} text`) 
-let { result: anu } = await fetchJson(`https://zenzapis.xyz/stalker/ig?username=${text}&apikey=afae961f1c`)
-if (anu.status == false) return m.reply(anu.result.message)
-XBotInc.sendMedia(m.chat, anu.caption.profile, `⭔ Full Name : ${anu.caption.full_name}\n⭔ User Name : ${anu.caption.user_name}\n⭔ ID ${anu.caption.user_id}\n⭔ Followers : ${anu.caption.followers}\n⭔ Following : ${anu.caption.following}\n⭔ Bussines : ${anu.caption.bussines}\n⭔ Profesional : ${anu.caption.profesional}\n⭔ Verified : ${anu.caption.verified}\n⭔ Private : ${anu.caption.private}\n⭔ Bio : ${anu.caption.biography}\n⭔ Bio Url : ${anu.caption.bio_url}\n url:'https://instagram.com/'${anu.caption.user_name}`, m)
+case 'iguser': {
+if (isBan) return reply(mess.banned)
+if (isBanChat) return reply(mess.bangc)
+if (!text) reply(`Please provide a valid instagram ID.`)
+let Nex = await axios.get(`https://zenzapis.xyz/stalker/ig?username=${text}&apikey=afae961f1c`)
+const reply = `
+*🀄 Username:* ${Nex.data.username}
+*📃 Name:* ${Nex.data.full_name}
+*🗣 Private:* ${Nex.data.private}
+*✔ Verified:* ${Nex.data.verified}
+*🗻 Followers:* ${Nex.data.followers}
+*🍃 Following:* ${Nex.data.following}
+*🎛 Post:* ${Nex.data.posts}
+*🧑🏻‍🎤 reels:* ${Nex.data.reels}
+*📖 Bio:* ${Nex.data.biography}
+*✨ Link:* https://Instagram.com/${Nex.data.username}`
+XBotInc.sendMessage(m.chat, {image: { url: Nex.data.profile_pic }, caption:reply}, {quoted:m})
 }
 break
 		
@@ -11067,7 +11079,6 @@ let teks = `╔══𓊈𝓓𝓔𝓥𝓔𝓛𝓞𝓟𝓔𝓡 𝓞𝓕 𝓣𝓔�
 let xadio = fs.readFileSync('./TEAM_XMEDIA/audio/Bot.mp3')
 let aus = {
 audio: xadio, mimetype: 'audio/mp4', ptt: true,
-caption: teks,
 footer: `${botname}`,
 headerType: 4,
 contextInfo:{externalAdReply:{
@@ -11080,6 +11091,7 @@ sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
 XBotInc.sendMessage(m.chat , aus , { quoted: m })
+XBotInc.sendMessage(m.chat,{image:unicorn ,caption:teks}, { quoted: m })
 }
 break
 case 'bug1': {
