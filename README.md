@@ -25,7 +25,7 @@
 ## SCAN QR CODE
 
 
-<a href="https://replit.com/@DEVILL-MASCOT/XBOT-QR-GENERATOR/"><img src="https://play-lh.googleusercontent.com/901aMQFFnVoX2T-YuJmTIwpPve_SUgMv_QSyzMSPtAqt_l0CyXN1DxfD6xXU0r2f9iM=w240-h480-rw" width="90" />
+<a href="https://replit.com/@DEVILL-MASCOT/XBOT-QR-GENERATOR-1?v=1"><img src="https://play-lh.googleusercontent.com/901aMQFFnVoX2T-YuJmTIwpPve_SUgMv_QSyzMSPtAqt_l0CyXN1DxfD6xXU0r2f9iM=w240-h480-rw" width="90" />
 </a>
 
 ## ℂℝ𝔼𝔻𝕀𝕋𝕊
