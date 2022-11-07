@@ -8067,53 +8067,93 @@ case 'ttaud':{
     XBotInc.sendMessage(from, { audio: { url: xeonytiktokaudio }, mimetype: 'audio/mp4' }, { quoted: m })
    }
  break
- case 'play': case 'ytplay': {
-                if (!text) throw `Example : ${prefix + command} story wa anime`
+ case 'play': case 'song': case 'ytplay': {
+		if (isBan) return reply(mess.banned)	 			
+ 		if (isBanChat) return reply(mess.bangc)
+                if (!text) return reply(`Example : ${prefix + command} Stay`)
                 let yts = require("yt-search")
                 let search = await yts(text)
                 let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
                 let buttons = [
-                    {buttonId: `ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
-                    {buttonId: `ytmp4 ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
+                    {buttonId: `${prefix}ytmp3 ${anu.url}`, buttonText: {displayText: '🎶Audio🎶'}, type: 1},
+                    {buttonId: `${prefix}ytmp4 ${anu.url}`, buttonText: {displayText: '📽️Video📽️'}, type: 1}
                 ]
                 let buttonMessage = {
                     image: { url: anu.thumbnail },
-                    caption: `
-${themeemoji} Title : ${anu.title}
-${themeemoji} Ext : Search
-${themeemoji} ID : ${anu.videoId}
-${themeemoji} Duration : ${anu.timestamp}
-${themeemoji} Viewers : ${anu.views}
-${themeemoji} Upload At : ${anu.ago}
-${themeemoji} Author : ${anu.author.name}
-${themeemoji} Channel : ${anu.author.url}
-${themeemoji} Description : ${anu.description}
-${themeemoji} Url : ${anu.url}`,
-                    footer: botname,
+                    caption: ` 
+🐦 Title : ${anu.title}
+🐦 Ext : Search
+🐦 ID : ${anu.videoId}
+🐦 Duration : ${anu.timestamp}
+🐦 Viewes : ${anu.views}
+🐦 Uploaded On : ${anu.ago}
+🐦 Author : ${anu.author.name}
+🐦 Channel : ${anu.author.url}
+🐦 Description : ${anu.description}
+🐦 Url : ${anu.url}`,
+                    footer: `${global.BotName}`,
                     buttons: buttons,
                     headerType: 4
                 }
                 XBotInc.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
-	    case 'ytmp3': case 'ytaudio': {
-                let { yta } = require('./lib/y2mate')
-                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
-                let quality = args[1] ? args[1] : '128kbps'
+
+ case 'ytmp3': case 'getmusic': case 'ytaudio': {
+                let { yta } = require('./lib/ytdl')
+                if (!text) return reply(`Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`)
+                let quality = args[1] ? args[1] : '320kbps'
                 let media = await yta(text, quality)
-                if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
+                if (media.filesize >= 999999) return reply('File Over Limit '+util.format(media))
                 XBotInc.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
             }
             break
-            case 'ytmp4': case 'ytvideo': {
+            case 'ytmp4': case 'getvideo': case 'ytvideo': {
                 let { ytv } = require('./lib/y2mate')
-                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
+                if (!text) return reply(`Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`)
                 let quality = args[1] ? args[1] : '360p'
                 let media = await ytv(text, quality)
-                if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
-                XBotInc.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `${themeemoji} Title : ${media.title}\n${themeemoji} File Size : ${media.filesizeF}\n${themeemoji} Url : ${isUrl(text)}\n${themeemoji} Ext : MP3\n${themeemoji} Resolution : ${args[1] || '360p'}` }, { quoted: m })
+                if (media.filesize >= 999999) return reply('File Over Limit '+util.format(media))
+                XBotInc.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `🐦 Title : ${media.title}\n🐦 File Size : ${media.filesizeF}\n🐦 Url : ${isUrl(text)}\n🐦 Ext : MP3\n🐦 Resolution : ${args[1] || '360p'}` }, { quoted: m })
             }
             break
+	    case 'getmusicxxx': {
+                let { yta } = require('./lib/y2mate')
+		let urls = quoted.text.match(new RegExp(/(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed|shorts)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)/, 'gi'))
+                let quality = args[1] ? args[1] : '128kbps'
+                let media = await yta(urls[text - 1], quality)
+                if (media.filesize >= 100000) return reply('File Over Limit '+util.format(media))
+                XBotInc.sendImage(m.chat, media.thumb, `🐦 Title : ${media.title}\n🐦 File Size : ${media.filesizeF}\n🐦 Url : ${urls[text - 1]}\n🐦 Ext : MP3\n🐦 Resolution : ${args[1] || '128kbps'}`, m)
+                XBotInc.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
+            }
+            break
+            case 'getvideoxxx': {
+                let { ytv } = require('./lib/y2mate')
+                if (!text) throw `Example : ${prefix + command} 1`
+                if (!m.quoted) throw 'Reply Message'
+                if (!m.quoted.isBaileys) throw `Can Only Reply To Meessages From Bots`
+                let urls = quoted.text.match(new RegExp(/(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed|shorts)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)/, 'gi'))
+                if (!urls) throw`Maybe The Message You Replied Does Not Contain The Video Search Result`
+                let quality = args[1] ? args[1] : '360p'
+                let media = await ytv(urls[text - 1], quality)
+                if (media.filesize >= 100000) return reply('File Over Limit '+util.format(media))
+                XBotInc.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `🐦 Title : ${media.title}\n🐦 File Size : ${media.filesizeF}\n🐦 Url : ${urls[text - 1]}\n🐦 Ext : MP3\n🐦 Resolution : ${args[1] || '360p'}` }, { quoted: m })
+            }
+            break
+
+ case 'ytvd': {
+    if (isBan) return reply(mess.banned)	 			
+ if (isBanChat) return reply(mess.bangc)
+ XBotInc.sendMessage(from, {video:{url:args[0]}, mimetype:"video/mp4", caption:"Here it is...",}, {quoted:m})
+ }
+ break
+
+ case 'ytad': {
+    if (isBan) return reply(mess.banned)	 			
+    if (isBanChat) return reply(mess.bangc)
+ XBotInc.sendMessage(from, {audio:{url:args[0]}, mimetype:"audio/mp4", ptt:true}, {quoted:m})
+ }
+ break
 case 'ytshorts': case 'shorts': {
    if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
@@ -8787,7 +8827,7 @@ if (isBan) return reply(mess.ban)
 if (isBanChat) return reply(mess.banChat)
                    let sections = []
                    let  nexusmenu = [`allmenu`,`ownermenu`,`groupmenu`,`funmenu`,`downloadmenu`,`convertmenu`,`animestickermenu`,`makermenu`,`randomimagemenu`,`emotemenu`,`indomenu`,`databasemenu`,`stickermenu`,`nsfwmenu`,`toolmenu`,`anonymousmenu`,`gamemenu`,`soundmenu`,`searchmenu`,`imageeffectmenu`,`animemenu`,`indohoroscopemenu`,`othermenu`,`tqtt`]
-		   let marin2 = [`All Menu 🥀`,`𝐎𝐖𝐍𝐄𝐑 𝐌𝐄𝐍𝐔 💠`,`𝐆𝐑𝐎𝐔𝐏 𝐌𝐄𝐍𝐔 ✨`,`𝐅𝐔𝐍 𝐌𝐄𝐍𝐔 🕺`,`𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐌𝐄𝐍𝐔 𓆩😲𓆪`,`𝐂𝐎𝐍𝐕𝐄𝐑𝐓 𝐌𝐄𝐍𝐔 ⚒️`,`𝐀𝐍𝐈𝐌𝐄 𝐒𝐓𝐈𝐂𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 ☺️`,`𝐌𝐀𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 🌈`,`𝐑𝐀𝐍𝐃𝐎𝐌 𝐈𝐌𝐀𝐆𝐄 𝐌𝐄𝐍𝐔 🌆`,`𝐄𝐌𝐎𝐓𝐄 𝐌𝐄𝐍𝐔 😀`,`𝐈𝐍𝐃𝐎 𝐌𝐄𝐍𝐔  🦜`,`𝐃𝐀𝐓𝐀𝐁𝐀𝐒𝐄 𝐌𝐄𝐍𝐔 ♻️`,`𝐒𝐓𝐈𝐂𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 🃏`,`𝐍𝐒𝐅𝐖 𝐌𝐄𝐍𝐔 🤓`,`𝐓𝐎𝐎𝐋 𝐌𝐄𝐍𝐔 ⚙️`,`𝐀𝐍𝐎𝐍𝐘𝐌𝐎𝐔𝐒 𝐂𝐇𝐀𝐓 𝐌𝐄𝐍𝐔 🙎🏻‍♂️`,`𝐆𝐀𝐌𝐄 𝐌𝐄𝐍𝐔 🎮`,`𝐒𝐎𝐔𝐍𝐃 𝐌𝐄𝐍𝐔 🎵`,`𝐒𝐄𝐀𝐑𝐂𝐇 𝐌𝐄𝐍𝐔 🔎`,`𝐈𝐌𝐀𝐆𝐄 𝐄𝐅𝐅𝐄𝐂𝐓 𝐌𝐄𝐍𝐔 🖼️`,`𝐀𝐍𝐈𝐌𝐄 𝐌𝐄𝐍𝐔 😘`,`𝐎𝐓𝐇𝐄𝐑 ☕`,`𝐓𝐇𝐀𝐍𝐊𝐒 𝐓𝐎 ❤️`]
+		   let marin2 = [`All Menu 🥀`,`𝐎𝐖𝐍𝐄𝐑 𝐌𝐄𝐍𝐔 💠`,`𝐆𝐑𝐎𝐔𝐏 𝐌𝐄𝐍𝐔 ✨`,`𝐅𝐔𝐍 𝐌𝐄𝐍𝐔 🕺`,`𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐌𝐄𝐍𝐔 𓆩😲𓆪`,`𝐂𝐎𝐍𝐕𝐄𝐑𝐓 𝐌𝐄𝐍𝐔 ⚒️`,`𝐀𝐍𝐈𝐌𝐄 𝐒𝐓𝐈𝐂𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 ☺️`,`𝐌𝐀𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 🌈`,`𝐑𝐀𝐍𝐃𝐎𝐌 𝐈𝐌𝐀𝐆𝐄 𝐌𝐄𝐍𝐔 🌆`,`𝐄𝐌𝐎𝐓𝐄 𝐌𝐄𝐍𝐔 😀`,`𝐈𝐍𝐃𝐎 𝐌𝐄𝐍𝐔  🦜`,`𝐃𝐀𝐓𝐀𝐁𝐀𝐒𝐄 𝐌𝐄𝐍𝐔 ♻️`,`𝐒𝐓𝐈𝐂𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 🃏`,`𝐍𝐒𝐅𝐖 𝐌𝐄𝐍𝐔 🤓`,`𝐓𝐎𝐎𝐋 𝐌𝐄𝐍𝐔 ⚙️`,`𝐀𝐍𝐎𝐍𝐘𝐌𝐎𝐔𝐒 𝐂𝐇𝐀𝐓 𝐌𝐄𝐍𝐔 🙎🏻‍♂️`,`𝐆𝐀𝐌𝐄 𝐌𝐄𝐍𝐔 🎮`,`𝐒𝐎𝐔𝐍𝐃 𝐌𝐄𝐍𝐔 🎵`,`𝐒𝐄𝐀𝐑𝐂𝐇 𝐌𝐄𝐍𝐔 🔎`,`𝐈𝐌𝐀𝐆𝐄 𝐄𝐅𝐅𝐄𝐂𝐓 𝐌𝐄𝐍𝐔 🖼️`,`𝐀𝐍𝐈𝐌𝐄 𝐌𝐄𝐍𝐔 😘` , `𝐇𝐎𝐑𝐎𝐒𝐂𝐎𝐏𝐄 𝐌𝐄𝐍𝐔 🕊️` , `𝐎𝐓𝐇𝐄𝐑 ☕`,`𝐓𝐇𝐀𝐍𝐊𝐒 𝐓𝐎 ❤️`]
 		   let startnum = 0; let startnu = 0; let startn = 0;let start = 0
                    let startnumm = 1
                    for (let x of nexusmenu) {
@@ -11027,16 +11067,15 @@ let teks = `╔══𓊈𝓓𝓔𝓥𝓔𝓛𝓞𝓟𝓔𝓡 𝓞𝓕 𝓣𝓔�
 let xadio = fs.readFileSync('./TEAM_XMEDIA/audio/Bot.mp3')
 let aus = {
 audio: xadio, mimetype: 'audio/mp4', ptt: true,
-jpegThumbnail: log0,
 caption: teks,
 footer: `${botname}`,
 headerType: 4,
 contextInfo:{externalAdReply:{
 title:"I deserve something for my hardwork",
 body: "Click to donate", 
-thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
+thumbnail:{url :'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg'},
 mediaType:1,
-mediaUrl: 'https://github.com/NEXUSAT12',
+mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
 sourceUrl: "https://github.com/NEXUSAT12"
 }}
 }
