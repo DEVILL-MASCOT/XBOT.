@@ -6192,9 +6192,13 @@ let cari = await youtubeSearch(`${text}`)
 if (!args.join(" ")) return replay(`Example : ${prefix + command} stay jb`)
 let teks = '*| YOUTUBE SEARCH |*\n\n Result From '+text+'\n\n'
 let no = 1
-for (let i of cari.video) {
-teks += `${global.themeemoji} No : ${no++}\n${global.themeemoji} Type : ${i.type}\n${global.themeemoji} Video ID : ${i.videoId}\n${global.themeemoji} Title : ${i.title}\n${global.themeemoji} Views : ${i.views}\n${global.themeemoji} Duration : ${i.timestamp}\n${global.themeemoji} Uploaded : ${i.ago}\n${global.themeemoji} Author : ${i.author.name}\n${global.themeemoji} Url : ${i.url}\n\n─────────────────\n\n`
-}
+let listSections = []
+Object.values(cari).map((v, index) => {
+listSections.push([index + ' '  + ' ' + v.title, [
+          ['Video 🎥', `${prefix}` + 'ytv ' + v.url + ' yes', '\n⌚ *Duration:* ' + v.durationH + '\n⏲️ *Uploaded:* ' + v.publishedTime + '\n👁️ *Views:* ' + v.view + '\n📎 *Url:* ' + v.url],
+          ['Audio 🎧', `${prefix}` + 'yta ' + v.url + ' yes', '\n⌚ *Duration:* ' + v.durationH + '\n⏲️ *Uploaded:* ' + v.publishedTime + '\n👁️ *Views:* ' + v.view + '\n📎 *Url:* ' + v.url]
+        ]])
+	})
 XBotInc.sendMessage(m.chat, { image: { url: cari[0].thumbnail },  caption: teks }, { quoted: m })
 }
 break
@@ -8104,7 +8108,7 @@ reply(mess.error)
 }
 sections.push(list)   
 }
-const sendm =  Wizard.sendMessage(
+const sendm =  XBotInc.sendMessage(
 m.chat, 
 {
 text: "\n\n*_DONE SCRAPING DATA_*",
