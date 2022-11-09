@@ -6199,7 +6199,7 @@ listSections.push([index + ' '  + ' ' + v.title, [
           ['Audio 🎧', `${prefix}` + 'yta ' + v.url + ' yes', '\n⌚ *Duration:* ' + v.durationH + '\n⏲️ *Uploaded:* ' + v.publishedTime + '\n👁️ *Views:* ' + v.view + '\n📎 *Url:* ' + v.url]
         ]])
 	})
-XBotInc.sendMessage(m.chat, { image: { url: cari[0].thumbnail },  caption: teks }, { quoted: m })
+XBotInc.sendMessage(m.chat, { image: { url: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg' },  caption: teks }, { quoted: m })
 }
 break
 case 'google': {
@@ -8087,46 +8087,43 @@ reply(mess.error)
 		if (isBan) return reply(mess.banned)	 			
  		if (isBanChat) return reply(mess.bangc)
                 if (!text) return reply(`Example : ${prefix + command} Stay`)
-                let yts = axios.get(`https://zenzapis.xyz/searching/ytsearch?query=${text}%19xl&apikey=afae961f1c`)
-                let search = await yts
-                let sections = []   
-      let listmenu = [`ytmp4 ${search.all[0].url}`,`ytmp3 ${search.all[1].url}`,`ytmp4 ${search.all[2].url}`,`ytmp3 ${search.all[3].url}`,`ytmp4 ${search.all[4].url}`,`ytmp3 ${search.all[5].url}`,`ytmp4 ${search.all[6].url}`,`ytmp3 ${search.all[7].url}`,`ytmp4 ${search.all[8].url}`,`ytmp3 ${search.all[9].url}`,`ytmp4 ${search.all[10].url}`,`ytmp3 ${search.all[11].url}`,`ytmp4 ${search.all[12].url}`,`ytmp3 ${search.all[13].url}`,`ytmp4 ${search.all[14].url}`,`ytmp3 ${search.all[15].url}`,`ytmp4 ${search.all[16].url}`,`ytmp3 ${search.all[17].url}`,`ytmp4 ${search.all[18].url}`,`ytmp3 ${search.all[19].url}`,]
-      let listmenuu = [`VIDEO MP4⬤: ${search.all[0].title}`,`SONG MP3⬤: ${search.all[1].title}`,`VIDEO MP4⬤: ${search.all[2].title}`,`SONG MP3⬤: ${search.all[3].title}`,`VIDEO MP4⬤: ${search.all[4].title}`,`SONG MP3⬤: ${search.all[5].title}`,`VIDEO MP4⬤: ${search.all[6].title}`,`SONG MP3⬤: ${search.all[7].title}`,`VIDEO MP4⬤: ${search.all[8].title}`,`SONG MP3⬤: ${search.all[9].title}`,`VIDEO MP4⬤: ${search.all[10].title}`,`SONG MP3⬤: ${search.all[11].title}`,`VIDEO MP4⬤: ${search.all[12].title}`,`SONG MP3⬤: ${search.all[13].title}`,`VIDEO MP4⬤: ${search.all[14].title}`,`SONG MP3⬤: ${search.all[15].title}`,`VIDEO MP4⬤: ${search.all[16].title}`,`SONG MP3⬤: ${search.all[17].title}`,`VIDEO MP4⬤: ${search.all[18].title}`,`SONG MP3⬤: ${search.all[19].title}`]
-      let listmenuuu = [`\n${search.all[0].description}`,`\n${search.all[1].description}`,`\n${search.all[2].description}`,`\n${search.all[3].description}`,`\n${search.all[4].description}`,`\n${search.all[5].description}`,`\n${search.all[6].description}`,`\n${search.all[7].description}`,`\n${search.all[8].description}`,`\n${search.all[9].description}`,`\n${search.all[10].description}`,`\n${search.all[11].description}`,`\n${search.all[12].description}`,`\n${search.all[13].description}`,`\n${search.all[14].description}`,`\n${search.all[15].description}`,`\n${search.all[16].description}`,`\n${search.all[17].description}`,`\n${search.all[18].description}`,`\n${search.all[19].description}`]
-      let nombor = 1
-      let startnum = 0
-      let startnumm = 0
-      for (let x of listmenu) {
-      const list = {title: 'RESULT NUMBER ' + nombor++,
-      rows: [
-         {
-          title: `${listmenuu[startnum++]}`,
-          description: `${listmenuuu[startnumm++]}`,
-          rowId: `${prefix}${x}`
-}, 
-]
-}
-sections.push(list)   
-}
-const sendm =  XBotInc.sendMessage(
-m.chat, 
-{
-text: "\n\n*_DONE SCRAPING DATA_*",
-footer: `${global.botname}`,
-title: `HERE IS YOUR RESULTS CHOMIE FROM *${text}* _select song or video below_`,
-buttonText: "CLICK HERE",
-sections
-}, { quoted : m })
-}
+	 	let vid = (await youtubeSearch(text)).video[0]
+		let { title, description, thumbnail, videoId, durationH, viewH, publishedTime } = vid
+		const url = 'https://www.youtube.com/watch?v=' + videoId
+                let captvid = `╭──── 〔 Y O U T U B E 〕 ─⬣
+⬡ Judul: ${title}
+⬡ Durasi: ${durationH}
+⬡ Views: ${viewH}
+⬡ Upload: ${publishedTime}
+⬡ Link: ${vid.url}
+╰────────⬣`
+XBotInc.sendButton(m.chat, `╭──── 〔 Y O U T U B E 〕 ─⬣
+⬡ Judul: ${title}
+⬡ Durasi: ${durationH}
+⬡ Views: ${viewH}
+⬡ Upload: ${publishedTime}
+⬡ Link: ${vid.url}
+╰────────⬣`, author.trim(), await( await conn.getFile(thumbnail)).data, ['📽VIDEO', `${prefix}getvid ${url} 360`], false, { quoted: m, 'document': { 'url':'https://wa.me/918130784851' },
+'mimetype': global.dpdf,
+'fileName': `𝕐𝕠𝕦𝕋𝕦𝕓𝕖 ℙ𝕝𝕒𝕪𝕤`,
+'fileLength': 666666666666666,
+'pageCount': 666,contextInfo: { externalAdReply: { showAdAttribution: true,
+mediaType:  2,
+mediaUrl: `${url}`,
+title: `AUDIO SEDANG DIKIRIM...`,
+body: `${global.botname}`,
+sourceUrl: 'http://wa.me/918130784851', thumbnail: await ( await XBotInc.getFile(thumbnail)).data
+  }
+ } 
+})
 break
 
  case 'ytmp3': case 'getmusic': case 'ytaudio': {
-                let  yta  = axios.get(`https://zenzapis.xyz/downloader/ytplay?apikey=afae961f1c&query=${text}`)
+                let  yt = await youtubedlv2(url).catch(async _ => await youtubedl(url)).catch(async _ => await youtubedlv3(url))
                 if (!text) return reply(`Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`)
-                let quality = args[1] ? args[1] : '320kbps'
-                let media = await yta(text, quality)
-                if (media.filesize >= 999999) return reply('File Over Limit '+util.format(media))
-                XBotInc.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
+                const link = await yt.audio['128kbps'].download()
+                if (yt.filesize >= 999999) return reply('File Over Limit '+util.format(yt))
+                XBotInc.sendMessage(m.chat, { audio: { url: link }, mimetype: 'audio/mpeg', fileName: `${yt.title}.mp3` }, { quoted: m })
             }
             break
             case 'ytmp4': case 'getvideo': case 'ytvideo': {
