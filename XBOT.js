@@ -37,7 +37,7 @@ const toHur = require('@develoka/angka-terbilang-js')
 const { hentai } = require('./lib/scraper2.js')
 const { xbug } = require('./XBUG/xbug.js')
 const { xbug2 } = require('./XBUG/xbug2.js')
-const { youtubeSearch, youtubedl, youtubedlv2, youtubedlv3 } require('@bochilteam/scraper')
+const { youtubeSearch, youtubedl, youtubedlv2, youtubedlv3 } = require('@bochilteam/scraper')
 
 
 const {
