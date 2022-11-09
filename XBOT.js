@@ -37,6 +37,7 @@ const toHur = require('@develoka/angka-terbilang-js')
 const { hentai } = require('./lib/scraper2.js')
 const { xbug } = require('./XBUG/xbug.js')
 const { xbug2 } = require('./XBUG/xbug2.js')
+const { youtubeSearch, youtubedl, youtubedlv2, youtubedlv3 } require('@bochilteam/scraper')
 
 
 const {
@@ -6187,15 +6188,14 @@ break
 case 'yts': case 'ytsearch': {
 if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
+let cari = await youtubeSearch(`${text}`)
 if (!args.join(" ")) return replay(`Example : ${prefix + command} stay jb`)
-let yts = axios.get(`https://zenzapis.xyz/searching/ytsearch?query=${text}%20xl&apikey=afae961f1c`)
-let search = await yts(args.join(" "))
 let teks = '*| YOUTUBE SEARCH |*\n\n Result From '+text+'\n\n'
 let no = 1
-for (let i of search.all) {
+for (let i of cari.video) {
 teks += `${global.themeemoji} No : ${no++}\n${global.themeemoji} Type : ${i.type}\n${global.themeemoji} Video ID : ${i.videoId}\n${global.themeemoji} Title : ${i.title}\n${global.themeemoji} Views : ${i.views}\n${global.themeemoji} Duration : ${i.timestamp}\n${global.themeemoji} Uploaded : ${i.ago}\n${global.themeemoji} Author : ${i.author.name}\n${global.themeemoji} Url : ${i.url}\n\n─────────────────\n\n`
 }
-XBotInc.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })
+XBotInc.sendMessage(m.chat, { image: { url: cari[0].thumbnail },  caption: teks }, { quoted: m })
 }
 break
 case 'google': {
