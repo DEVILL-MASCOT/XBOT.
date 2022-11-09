@@ -6184,11 +6184,11 @@ break
 	    })
 	    }
 	    break
-	case 'yts': case 'ytsearch': {
-   if (isBan) return reply(mess.ban)	 			
+case 'yts': case 'ytsearch': {
+if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
 if (!args.join(" ")) return replay(`Example : ${prefix + command} stay jb`)
-let yts = require("yt-search")
+let yts = axios.get(`https://zenzapis.xyz/searching/ytsearch?query=${text}%20xl&apikey=afae961f1c`)
 let search = await yts(args.join(" "))
 let teks = '*| YOUTUBE SEARCH |*\n\n Result From '+text+'\n\n'
 let no = 1
@@ -8064,15 +8064,15 @@ break
     XBotInc.sendMessage(from, { video: { url: xeonytiktoknowm }, caption: "Here you go!" }, { quoted: m })
    }
   break
-  case 'tiktokaudio':
+case 'tiktokaudio':
 case 'tiktokmusic':
 case 'ttaud':{
-	if (isBan) return reply(mess.ban)
-	if (isBanChat) return reply(mess.banChat)
-  if (!q) return reply('Where is the audio?')
-  if (!q.includes('tiktok')) return reply(`That's not a tiktok link!`)
-   const musim_rambutan = await XBotIncTiktok(`${q}`).catch(e => {
- reply(mess.error) 
+if (isBan) return reply(mess.ban)
+if (isBanChat) return reply(mess.banChat)
+if (!q) return reply('Where is the audio?')
+if (!q.includes('tiktok')) return reply(`That's not a tiktok link!`)
+const musim_rambutan = await XBotIncTiktok(`${q}`).catch(e => {
+reply(mess.error) 
 } )
    console.log(musim_rambutan)
    const xeonytiktokaudio = musim_rambutan.result.nowatermark
@@ -8083,10 +8083,10 @@ case 'ttaud':{
 		if (isBan) return reply(mess.banned)	 			
  		if (isBanChat) return reply(mess.bangc)
                 if (!text) return reply(`Example : ${prefix + command} Stay`)
-                let yts = axios.get(`https://zenzapis.xyz/searching/ytsearch?query=${text}%20xl&apikey=afae961f1c`)
+                let yts = axios.get(`https://zenzapis.xyz/searching/ytsearch?query=${text}%19xl&apikey=afae961f1c`)
                 let search = await yts
                 let sections = []   
-let listmenu = [`ytmp4 ${search.all[0].url}`,`ytmp3 ${search.all[1].url}`,`ytmp4 ${search.all[2].url}`,`ytmp3 ${search.all[3].url}`,`ytmp4 ${search.all[4].url}`,`ytmp3 ${search.all[5].url}`,`ytmp4 ${search.all[6].url}`,`ytmp3 ${search.all[7].url}`,`ytmp4 ${search.all[8].url}`,`ytmp3 ${search.all[9].url}`,`ytmp4 ${search.all[10].url}`,`ytmp3 ${search.all[11].url}`,`ytmp4 ${search.all[12].url}`,`ytmp3 ${search.all[13].url}`,`ytmp4 ${search.all[14].url}`,`ytmp3 ${search.all[15].url}`,`ytmp4 ${search.all[16].url}`,`ytmp3 ${search.all[17].url}`,`ytmp4 ${search.all[18].url}`,`ytmp3 ${search.all[19].url}`]
+      let listmenu = [`ytmp4 ${search.all[0].url}`,`ytmp3 ${search.all[1].url}`,`ytmp4 ${search.all[2].url}`,`ytmp3 ${search.all[3].url}`,`ytmp4 ${search.all[4].url}`,`ytmp3 ${search.all[5].url}`,`ytmp4 ${search.all[6].url}`,`ytmp3 ${search.all[7].url}`,`ytmp4 ${search.all[8].url}`,`ytmp3 ${search.all[9].url}`,`ytmp4 ${search.all[10].url}`,`ytmp3 ${search.all[11].url}`,`ytmp4 ${search.all[12].url}`,`ytmp3 ${search.all[13].url}`,`ytmp4 ${search.all[14].url}`,`ytmp3 ${search.all[15].url}`,`ytmp4 ${search.all[16].url}`,`ytmp3 ${search.all[17].url}`,`ytmp4 ${search.all[18].url}`,`ytmp3 ${search.all[19].url}`,]
       let listmenuu = [`VIDEO MP4⬤: ${search.all[0].title}`,`SONG MP3⬤: ${search.all[1].title}`,`VIDEO MP4⬤: ${search.all[2].title}`,`SONG MP3⬤: ${search.all[3].title}`,`VIDEO MP4⬤: ${search.all[4].title}`,`SONG MP3⬤: ${search.all[5].title}`,`VIDEO MP4⬤: ${search.all[6].title}`,`SONG MP3⬤: ${search.all[7].title}`,`VIDEO MP4⬤: ${search.all[8].title}`,`SONG MP3⬤: ${search.all[9].title}`,`VIDEO MP4⬤: ${search.all[10].title}`,`SONG MP3⬤: ${search.all[11].title}`,`VIDEO MP4⬤: ${search.all[12].title}`,`SONG MP3⬤: ${search.all[13].title}`,`VIDEO MP4⬤: ${search.all[14].title}`,`SONG MP3⬤: ${search.all[15].title}`,`VIDEO MP4⬤: ${search.all[16].title}`,`SONG MP3⬤: ${search.all[17].title}`,`VIDEO MP4⬤: ${search.all[18].title}`,`SONG MP3⬤: ${search.all[19].title}`]
       let listmenuuu = [`\n${search.all[0].description}`,`\n${search.all[1].description}`,`\n${search.all[2].description}`,`\n${search.all[3].description}`,`\n${search.all[4].description}`,`\n${search.all[5].description}`,`\n${search.all[6].description}`,`\n${search.all[7].description}`,`\n${search.all[8].description}`,`\n${search.all[9].description}`,`\n${search.all[10].description}`,`\n${search.all[11].description}`,`\n${search.all[12].description}`,`\n${search.all[13].description}`,`\n${search.all[14].description}`,`\n${search.all[15].description}`,`\n${search.all[16].description}`,`\n${search.all[17].description}`,`\n${search.all[18].description}`,`\n${search.all[19].description}`]
       let nombor = 1
@@ -8117,7 +8117,7 @@ sections
 break
 
  case 'ytmp3': case 'getmusic': case 'ytaudio': {
-                let { yta } = require('./lib/ytdl')
+                let  yta  = axios.get(`https://zenzapis.xyz/downloader/ytplay?apikey=afae961f1c&query=${text}`)
                 if (!text) return reply(`Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`)
                 let quality = args[1] ? args[1] : '320kbps'
                 let media = await yta(text, quality)
@@ -8126,7 +8126,7 @@ break
             }
             break
             case 'ytmp4': case 'getvideo': case 'ytvideo': {
-                let { ytv } = require('./lib/y2mate')
+                let ytv  = axios.get(`https://zenzapis.xyz/downloader/youtube?apikey=afae961f1c&url=${text}`)
                 if (!text) return reply(`Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`)
                 let quality = args[1] ? args[1] : '360p'
                 let media = await ytv(text, quality)
