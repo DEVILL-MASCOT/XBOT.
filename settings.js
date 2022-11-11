@@ -51,10 +51,10 @@ global.packname = "ᎲᏰᎾᎿ Stickers\n\n\n\n\n\n\n\n\n\n\n✨✨✨ " //ur s
 global.author = "✨ᏦᎨᏁᎶᏁᎬᎲᏬᏕ" //ur sticker watermark author
 
 //Bot theme media
-global.thum = fs.readFileSync("./TEAM_XMEDIA/theme/NEXUS.jpg") //ur thumb pic
-global.log0 = fs.readFileSync("./TEAM_XMEDIA/theme/NEXUS.jpg") //ur logo pic
-global.err4r = fs.readFileSync("./TEAM_XMEDIA/theme/NEXUS.jpg") //ur error pic
-global.thumb = fs.readFileSync("./TEAM_XMEDIA/theme/NEXUS.jpg") //ur thumb pic
+global.thum = {url:'https://deposit.pictures/p/21da3271c89e420aaa3e23eb344be1ca'} //ur thumb pic
+global.log0 = {url:'https://deposit.pictures/p/21da3271c89e420aaa3e23eb344be1ca'} //ur logo pic
+global.err4r = {url:'https://deposit.pictures/p/21da3271c89e420aaa3e23eb344be1ca'} //ur error pic
+global.thumb = {url:'https://deposit.pictures/p/21da3271c89e420aaa3e23eb344be1ca'} //ur thumb pic
 
 //damtabase
 global.premium = ['918130784851'] //ur premium numbers
@@ -80,7 +80,7 @@ global.ntilink = []
 //omther
 global.sessionName = 'session'
 global.antitags = true
-global.prefa = ['#']
+global.prefa = ['#','.']
 global.sp = '⭔'
 global.mess = {
     success: 'Done ✓',
