@@ -67,7 +67,7 @@
         "util": "^0.12.5",
         "xfarr-api": "^1.0.3",
         "yargs": "^17.6.0",
-        "yotubesearch": "^1.1.6"
+        "youtube-search": "^1.1.6"
   },
   "directories": {
     "lib": "lib",
