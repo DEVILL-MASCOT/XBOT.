@@ -8829,9 +8829,9 @@ XBotInc.sendMessage(m.chat , ntus , { quoted: m })
 }
 break
 case 'command': {
-XBotInc.sendMessage(m.chat, { audio: fs.readFileSync('./TEAM_XMEDIA/audio/Bot.mp3'), mimetype: 'audio/mp4', ptt: true }, { quoted: m }
 if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
+XBotInc.sendMessage(m.chat, { audio: fs.readFileSync('./TEAM_XMEDIA/audio/Bot.mp3'), mimetype: 'audio/mp4', ptt: true }, { quoted: m }
                    let sections = []
                    let  nexusmenu = [`allmenu`,`ownermenu`,`groupmenu`,`funmenu`,`downloadmenu`,`convertmenu`,`animestickermenu`,`makermenu`,`randomimagemenu`,`emotemenu`,`indomenu`,`databasemenu`,`stickermenu`,`nsfwmenu`,`toolmenu`,`anonymousmenu`,`gamemenu`,`soundmenu`,`searchmenu`,`imageeffectmenu`,`animemenu`,`indohoroscopemenu`,`othermenu`,`tqtt`]
 		   let marin2 = [`All Menu 🥀`,`𝐎𝐖𝐍𝐄𝐑 𝐌𝐄𝐍𝐔 💠`,`𝐆𝐑𝐎𝐔𝐏 𝐌𝐄𝐍𝐔 ✨`,`𝐅𝐔𝐍 𝐌𝐄𝐍𝐔 🕺`,`𝐃𝐎𝐖𝐍𝐋𝐎𝐀𝐃𝐌𝐄𝐍𝐔 𓆩😲𓆪`,`𝐂𝐎𝐍𝐕𝐄𝐑𝐓 𝐌𝐄𝐍𝐔 ⚒️`,`𝐀𝐍𝐈𝐌𝐄 𝐒𝐓𝐈𝐂𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 ☺️`,`𝐌𝐀𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 🌈`,`𝐑𝐀𝐍𝐃𝐎𝐌 𝐈𝐌𝐀𝐆𝐄 𝐌𝐄𝐍𝐔 🌆`,`𝐄𝐌𝐎𝐓𝐄 𝐌𝐄𝐍𝐔 😀`,`𝐈𝐍𝐃𝐎 𝐌𝐄𝐍𝐔  🦜`,`𝐃𝐀𝐓𝐀𝐁𝐀𝐒𝐄 𝐌𝐄𝐍𝐔 ♻️`,`𝐒𝐓𝐈𝐂𝐊𝐄𝐑 𝐌𝐄𝐍𝐔 🃏`,`𝐍𝐒𝐅𝐖 𝐌𝐄𝐍𝐔 🤓`,`𝐓𝐎𝐎𝐋 𝐌𝐄𝐍𝐔 ⚙️`,`𝐀𝐍𝐎𝐍𝐘𝐌𝐎𝐔𝐒 𝐂𝐇𝐀𝐓 𝐌𝐄𝐍𝐔 🙎🏻‍♂️`,`𝐆𝐀𝐌𝐄 𝐌𝐄𝐍𝐔 🎮`,`𝐒𝐎𝐔𝐍𝐃 𝐌𝐄𝐍𝐔 🎵`,`𝐒𝐄𝐀𝐑𝐂𝐇 𝐌𝐄𝐍𝐔 🔎`,`𝐈𝐌𝐀𝐆𝐄 𝐄𝐅𝐅𝐄𝐂𝐓 𝐌𝐄𝐍𝐔 🖼️`,`𝐀𝐍𝐈𝐌𝐄 𝐌𝐄𝐍𝐔 😘` , `𝐇𝐎𝐑𝐎𝐒𝐂𝐎𝐏𝐄 𝐌𝐄𝐍𝐔 🕊️` , `𝐎𝐓𝐇𝐄𝐑 ☕`,`𝐓𝐇𝐀𝐍𝐊𝐒 𝐓𝐎 ❤️`]
