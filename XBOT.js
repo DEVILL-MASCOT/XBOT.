@@ -544,7 +544,7 @@ const reply = (teks) => {
 ///////auto chat bot///////	
     if (!isCmd && !m.isGroup){
     const botreply = await axios.get(`https://api.simsimi.net/v2/?text=${budy}&lc=en`)
-    let txt = `${botreply.data.cnt}`
+    let txt = `${botreply.data.success}`
     XBotInc.sendMessage(txt, { quoted: m })
     }
 	
@@ -6187,7 +6187,7 @@ case 'yts': case 'ytsearch': {
 if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
 if (!args.join(" ")) return replay(`Example : ${prefix + command} stay jb`)
-let yts = require("youtubeSearch")
+let yts = require("youtube-search")
 let search = await yts(args.join(" "))
 let teks = '*| YOUTUBE SEARCH |*\n\n Result From '+text+'\n\n'
 let no = 1
@@ -8080,7 +8080,7 @@ reply(mess.error)
  break
  case 'play': case 'ytplay': {
                 if (!text) throw `Example : ${prefix + command} story wa anime`
-                let yts = require("youtubeSearch")
+                let yts = require("youtube-search")
                 let search = await yts(text)
                 let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
                 let buttons = [
@@ -8110,15 +8110,15 @@ ${themeemoji} Url : ${anu.url}`,
  case 'ytmp3': case 'ytaudio': {
                 let yta = await await youtubedlv2(text).catch(async _ => await youtubedl(text)).catch(async _ => await youtubedlv3(text))
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
-                let media = await yt.audio['128kbps'].download()
+                let media = await yta.audio['128kbps'].download()
                 if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
                 XBotInc.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
             }
             break
             case 'ytmp4': case 'ytvideo': {
-                let ytv = await await youtubedlv2(text).catch(async _ => await youtubedl(text)).catch(async _ => await youtubedlv3(text))
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
-                let media = await yt.video['360kbps'].download()
+                const ytv = await youtubedl(text).catch(async () => await  youtubedlv2(text))
+                let media = await ytv.video['360kbps'].download()
                 if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
                 XBotInc.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `${themeemoji} Title : ${media.title}\n${themeemoji} File Size : ${media.filesizeF}\n${themeemoji} Url : ${isUrl(text)}\n${themeemoji} Ext : MP3\n${themeemoji} Resolution : ${args[1] || '360p'}` }, { quoted: m })
             }
@@ -8857,6 +8857,7 @@ if (isBanChat) return reply(mess.banChat)
        sections
       }, { quoted : m }
     )  
+XBotInc.sendMessage(m.chat, { audio: fs.readFileSync('./TEAM_XMEDIA/audio/Bot.mp3'), mimetype: 'audio/mp4', ptt: true }, { quoted: m })  
 }
 break
 case 'allmenu': {
@@ -9118,7 +9119,7 @@ const allmenu =  `╔═══════➻「 𝓸𝔀𝓷𝓮𝓻 」
 ╠🔥${prefix}𝙸𝚖𝚊𝚐𝚎𝚜𝚔𝚎𝚝𝚌𝚑
 ╠🔥${prefix}𝙸𝚗𝚟𝚎𝚛𝚝
 ╠🔥${prefix}𝙱𝚞𝚛𝚗
-╠🔥${prefix}𝚃𝚛𝚒𝚐𝚐𝚎𝚛𝚎𝚍𝚠𝚎𝚋𝚙
+╠🔥${prefix}𝚃??𝚒𝚐𝚐𝚎𝚛𝚎𝚍𝚠𝚎𝚋𝚙
 ╠🔥${prefix}𝚂𝚑𝚒𝚝
 ╠🔥${prefix}𝚁𝚒𝚙
 ╠🔥${prefix}𝙹𝚊𝚒𝚕
@@ -9438,7 +9439,7 @@ const allmenu =  `╔═══════➻「 𝓸𝔀𝓷𝓮𝓻 」
 ╠🔥${prefix}𝚂𝚘𝚞𝚗𝚍91
 ╠🔥${prefix}𝚂𝚘𝚞𝚗𝚍92
 ╠🔥${prefix}𝚂𝚘𝚞𝚗𝚍93
-╠🔥${prefix}𝚂𝚘𝚞𝚗𝚍94
+╠🔥${prefix}𝚂𝚘𝚞𝚗??94
 ╠🔥${prefix}𝚂𝚘𝚞𝚗𝚍95
 ╠🔥${prefix}𝚂𝚘𝚞𝚗𝚍96
 ╠🔥${prefix}𝚂𝚘𝚞𝚗𝚍97
@@ -9730,7 +9731,7 @@ let teks =  `╔═══════➻「 𝓰𝓻𝓸𝓾𝓹 」
 ╠🔥${prefix}𝙰𝚗𝚝𝚒𝚟𝚒𝚛𝚞𝚜 [𝙾𝚗/𝙾𝚏𝚏]
 ╠🔥${prefix}𝙰𝚗𝚝𝚒𝚝𝚘𝚡𝚒𝚌 [𝙾𝚗/𝙾𝚏𝚏]
 ╠🔥${prefix}𝙰𝚗𝚝𝚒𝚠𝚊𝚖𝚎 [𝙾𝚗/𝙾𝚏𝚏]
-╠🔥${prefix}𝙽𝚜𝚏𝚠 [𝙾𝚗/𝙾𝚏𝚏]
+╠🔥${prefix}𝙽𝚜𝚏𝚠 [𝙾𝚗/??𝚏𝚏]
 ╠🔥${prefix}𝙿𝚛𝚘𝚖𝚘𝚝𝚎 [𝚁𝚎𝚙𝚕𝚢/𝚃𝚊𝚐]
 ╠🔥${prefix}𝙳𝚎𝚖𝚘𝚝𝚎 [𝚁𝚎𝚙𝚕𝚢/𝚃𝚊𝚐]
 ╠🔥${prefix}𝚁𝚎𝚊𝚌𝚝 [𝚁𝚎𝚙𝚕𝚢 𝙴𝚖𝚘𝚓𝚒]
