@@ -9639,7 +9639,7 @@ headerType: 4,
 contextInfo:{externalAdReply:{
 title:"I deserve something for my hardwork",
 body: "Click to donate", 
-thumbnail: thum
+thumbnail: thum, 
 mediaType:1,
 mediaUrl: 'https://github.com/NEXUSAT12',
 sourceUrl: "https://github.com/NEXUSAT12"
