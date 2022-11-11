@@ -38,7 +38,7 @@ const { hentai } = require('./lib/scraper2.js')
 const { xbug } = require('./XBUG/xbug.js')
 const { xbug2 } = require('./XBUG/xbug2.js')
 const { youtubeSearch, youtubedl, youtubedlv2, youtubedlv3 } = require('@bochilteam/scraper')
-
+const { instagramStalk } = require('@bochilteam/scraper')
 
 const {
  FajarNews, 
@@ -3195,19 +3195,17 @@ case 'iguser': {
 if (isBan) return reply(mess.banned)
 if (isBanChat) return reply(mess.bangc)
 if (!text) reply(`Please provide a valid instagram ID.`)
-let Nex = await axios.get(`https://zenzapis.xyz/stalker/ig?username=${text}&apikey=afae961f1c`)
-const reply = `
-*🀄 Username:* ${Nex.data.username}
-*📃 Name:* ${Nex.data.full_name}
-*🗣 Private:* ${Nex.data.private}
-*✔ Verified:* ${Nex.data.verified}
-*🗻 Followers:* ${Nex.data.followers}
-*🍃 Following:* ${Nex.data.following}
-*🎛 Post:* ${Nex.data.posts}
-*🧑🏻‍🎤 reels:* ${Nex.data.reels}
-*📖 Bio:* ${Nex.data.biography}
-*✨ Link:* https://Instagram.com/${Nex.data.username}`
-XBotInc.sendMessage(m.chat, {image: { url: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg'}, caption:reply}, {quoted:m})
+const {username,avatar,name,description,followersH,followingH,postsH, } = await instagramStalk(`${text}`)
+let data = `
+💌 ${username} » 「 ${name} 」
+🎏 ${followersH}  ғᴏʟʟᴏᴡᴇʀs
+🎀 ${followingH}  ғᴏʟʟᴏᴡɪɴɢ
+📝 ${postsH} Pᴏꜱᴛ
+📑 Bɪᴏ: ${description}
+`.trim()
+ 
+  let pp = await( await conn.getFile(avatar)).data
+XBotInc.sendMessage(m.chat, {image: { url: pp }, caption:data}, {quoted:m})
 }
 break
 		
@@ -6188,18 +6186,15 @@ break
 case 'yts': case 'ytsearch': {
 if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
-let cari = await youtubeSearch(`${text}`)
 if (!args.join(" ")) return replay(`Example : ${prefix + command} stay jb`)
+let yts = require("youtubeSearch")
+let search = await yts(args.join(" "))
 let teks = '*| YOUTUBE SEARCH |*\n\n Result From '+text+'\n\n'
 let no = 1
-let listSections = []
-Object.values(cari).map((v, index) => {
-listSections.push([index + ' '  + ' ' + v.title, [
-          ['Video 🎥', `${prefix}` + 'ytv ' + v.url + ' yes', '\n⌚ *Duration:* ' + v.durationH + '\n⏲️ *Uploaded:* ' + v.publishedTime + '\n👁️ *Views:* ' + v.view + '\n📎 *Url:* ' + v.url],
-          ['Audio 🎧', `${prefix}` + 'yta ' + v.url + ' yes', '\n⌚ *Duration:* ' + v.durationH + '\n⏲️ *Uploaded:* ' + v.publishedTime + '\n👁️ *Views:* ' + v.view + '\n📎 *Url:* ' + v.url]
-        ]])
-	})
-XBotInc.sendMessage(m.chat, { image: { url: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg' },  caption: teks }, { quoted: m })
+for (let i of search.all) {
+teks += `${global.themeemoji} No : ${no++}\n${global.themeemoji} Type : ${i.type}\n${global.themeemoji} Video ID : ${i.videoId}\n${global.themeemoji} Title : ${i.title}\n${global.themeemoji} Views : ${i.views}\n${global.themeemoji} Duration : ${i.timestamp}\n${global.themeemoji} Uploaded : ${i.ago}\n${global.themeemoji} Author : ${i.author.name}\n${global.themeemoji} Url : ${i.url}\n\n─────────────────\n\n`
+}
+XBotInc.sendMessage(m.chat, { image: { url: search.all[0].thumbnail },  caption: teks }, { quoted: m })
 }
 break
 case 'google': {
@@ -8083,56 +8078,49 @@ reply(mess.error)
     XBotInc.sendMessage(from, { audio: { url: xeonytiktokaudio }, mimetype: 'audio/mp4' }, { quoted: m })
    }
  break
- case 'play': case 'song': case 'ytplay': {
-		if (isBan) return reply(mess.banned)	 			
- 		if (isBanChat) return reply(mess.bangc)
-                if (!text) return reply(`Example : ${prefix + command} Stay`)
-	 	let vid = (await youtubeSearch(text)).video[0]
-		let { title, description, thumbnail, videoId, durationH, viewH, publishedTime } = vid
-		const url = 'https://www.youtube.com/watch?v=' + videoId
-                let captvid = `╭──── 〔 Y O U T U B E 〕 ─⬣
-⬡ Judul: ${title}
-⬡ Durasi: ${durationH}
-⬡ Views: ${viewH}
-⬡ Upload: ${publishedTime}
-⬡ Link: ${vid.url}
-╰────────⬣`
-XBotInc.sendButton(m.chat, `╭──── 〔 Y O U T U B E 〕 ─⬣
-⬡ Judul: ${title}
-⬡ Durasi: ${durationH}
-⬡ Views: ${viewH}
-⬡ Upload: ${publishedTime}
-⬡ Link: ${vid.url}
-╰────────⬣`, author.trim(), await( await conn.getFile(thumbnail)).data, ['📽VIDEO', `${prefix}getvid ${url} 360`], false, { quoted: m, 'document': { 'url':'https://wa.me/918130784851' },
-'mimetype': global.dpdf,
-'fileName': `𝕐𝕠𝕦𝕋𝕦𝕓𝕖 ℙ𝕝𝕒𝕪𝕤`,
-'fileLength': 666666666666666,
-'pageCount': 666,contextInfo: { externalAdReply: { showAdAttribution: true,
-mediaType:  2,
-mediaUrl: `${url}`,
-title: `AUDIO SEDANG DIKIRIM...`,
-body: `${global.botname}`,
-sourceUrl: 'http://wa.me/918130784851', thumbnail: await ( await XBotInc.getFile(thumbnail)).data
-  }
- } 
-})
-break
-
- case 'ytmp3': case 'getmusic': case 'ytaudio': {
-                let  yt = await youtubedlv2(url).catch(async _ => await youtubedl(url)).catch(async _ => await youtubedlv3(url))
-                if (!text) return reply(`Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`)
-                const link = await yt.audio['128kbps'].download()
-                if (yt.filesize >= 999999) return reply('File Over Limit '+util.format(yt))
-                XBotInc.sendMessage(m.chat, { audio: { url: link }, mimetype: 'audio/mpeg', fileName: `${yt.title}.mp3` }, { quoted: m })
+ case 'play': case 'ytplay': {
+                if (!text) throw `Example : ${prefix + command} story wa anime`
+                let yts = require("youtubeSearch")
+                let search = await yts(text)
+                let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+                let buttons = [
+                    {buttonId: `ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
+                    {buttonId: `ytmp4 ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
+                ]
+                let buttonMessage = {
+                    image: { url: anu.thumbnail },
+                    caption: `
+${themeemoji} Title : ${anu.title}
+${themeemoji} Ext : Search
+${themeemoji} ID : ${anu.videoId}
+${themeemoji} Duration : ${anu.timestamp}
+${themeemoji} Viewers : ${anu.views}
+${themeemoji} Upload At : ${anu.ago}
+${themeemoji} Author : ${anu.author.name}
+${themeemoji} Channel : ${anu.author.url}
+${themeemoji} Description : ${anu.description}
+${themeemoji} Url : ${anu.url}`,
+                    footer: botname,
+                    buttons: buttons,
+                    headerType: 4
+                }
+                XBotInc.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
-            case 'ytmp4': case 'getvideo': case 'ytvideo': {
-                let ytv  = axios.get(`https://zenzapis.xyz/downloader/youtube?apikey=afae961f1c&url=${text}`)
-                if (!text) return reply(`Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`)
-                let quality = args[1] ? args[1] : '360p'
-                let media = await ytv(text, quality)
-                if (media.filesize >= 999999) return reply('File Over Limit '+util.format(media))
-                XBotInc.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `🐦 Title : ${media.title}\n🐦 File Size : ${media.filesizeF}\n🐦 Url : ${isUrl(text)}\n🐦 Ext : MP3\n🐦 Resolution : ${args[1] || '360p'}` }, { quoted: m })
+ case 'ytmp3': case 'ytaudio': {
+                let yta = await await youtubedlv2(text).catch(async _ => await youtubedl(text)).catch(async _ => await youtubedlv3(text))
+                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
+                let media = await yt.audio['128kbps'].download()
+                if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
+                XBotInc.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
+            }
+            break
+            case 'ytmp4': case 'ytvideo': {
+                let ytv = await await youtubedlv2(text).catch(async _ => await youtubedl(text)).catch(async _ => await youtubedlv3(text))
+                if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
+                let media = await yt.video['360kbps'].download()
+                if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
+                XBotInc.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `${themeemoji} Title : ${media.title}\n${themeemoji} File Size : ${media.filesizeF}\n${themeemoji} Url : ${isUrl(text)}\n${themeemoji} Ext : MP3\n${themeemoji} Resolution : ${args[1] || '360p'}` }, { quoted: m })
             }
             break
 	    case 'getmusicxxx': {
