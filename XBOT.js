@@ -8810,7 +8810,7 @@ let buttons = [
 {buttonId: `allmenu`, buttonText: {displayText:'allmenu'},type: 1}
 ]
 let ntus = {
-image: {url : 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg'},
+image: thum,
 jpegThumbnail: log0,
 caption: text,
 footer: `${botname}`,
@@ -8819,7 +8819,7 @@ headerType: 4,
 contextInfo:{externalAdReply:{
 title:"I deserve something for my hardwork",
 body: "Click to donate", 
-thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
+thumbnail: {url : 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg'},
 mediaType:1,
 mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
 sourceUrl: "https://github.com/NEXUSAT12"
@@ -8829,6 +8829,7 @@ XBotInc.sendMessage(m.chat , ntus , { quoted: m })
 }
 break
 case 'command': {
+XBotInc.sendMessage(m.chat, { audio: fs.readFileSync('./TEAM_XMEDIA/audio/Bot.mp3'), mimetype: 'audio/mp4', ptt: true }, { quoted: m }
 if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
                    let sections = []
@@ -8857,7 +8858,6 @@ if (isBanChat) return reply(mess.banChat)
        sections
       }, { quoted : m }
     )  
-XBotInc.sendMessage(m.chat, { audio: fs.readFileSync('./TEAM_XMEDIA/audio/Bot.mp3'), mimetype: 'audio/mp4', ptt: true }, { quoted: m })  
 }
 break
 case 'allmenu': {
@@ -8873,7 +8873,7 @@ const allmenu =  `╔═══════➻「 𝓸𝔀𝓷𝓮𝓻 」
 ╠🔥${prefix}𝚁𝚎𝚗𝚝𝚕𝚒𝚜𝚝
 ╠🔥${prefix}𝙱𝚊𝚗 [𝙰𝚍𝚍/𝙳𝚎𝚕]
 ╠🔥${prefix}𝙱𝚊𝚗𝚌𝚑𝚊𝚝 [𝙾𝚗/𝙾𝚏𝚏]
-╠🔥${prefix}𝙹𝚘𝚒𝚗 [𝙻𝚒𝚗𝚔]
+╠🔥${prefix}??𝚘𝚒𝚗 [𝙻𝚒𝚗𝚔]
 ╠🔥${prefix}𝙻𝚎𝚊𝚟𝚎𝚐𝚌
 ╠🔥${prefix}𝚂𝚎𝚝𝚋𝚒𝚘
 ╠🔥${prefix}𝙱𝚌𝚐𝚛𝚘𝚞𝚙 [𝚃𝚎𝚡𝚝]
@@ -9639,7 +9639,7 @@ headerType: 4,
 contextInfo:{externalAdReply:{
 title:"I deserve something for my hardwork",
 body: "Click to donate", 
-thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
+thumbnail: thum
 mediaType:1,
 mediaUrl: 'https://github.com/NEXUSAT12',
 sourceUrl: "https://github.com/NEXUSAT12"
