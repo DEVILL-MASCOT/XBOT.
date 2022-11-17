@@ -3195,17 +3195,8 @@ case 'iguser': {
 if (isBan) return reply(mess.banned)
 if (isBanChat) return reply(mess.bangc)
 if (!text) reply(`Please provide a valid instagram ID.`)
-const {username,avatar,name,description,followersH,followingH,postsH, } = await instagramStalk(`${text}`)
-let data = `
-💌 ${username} » 「 ${name} 」
-🎏 ${followersH}  ғᴏʟʟᴏᴡᴇʀs
-🎀 ${followingH}  ғᴏʟʟᴏᴡɪɴɢ
-📝 ${postsH} Pᴏꜱᴛ
-📑 Bɪᴏ: ${description}
-`.trim()
- 
-  let pp = await( await conn.getFile(avatar)).data
-XBotInc.sendMessage(m.chat, {image: { url: pp }, caption:data}, {quoted:m})
+let { result: anu } = await axios.get(`https://zenzapis.xyz/stalker/ig?username=${text}&apikey=afae961f1c`)
+XBotInc.sendMedia(m.chat, anu.caption.profile_hd, '', `⭔ Full Name : ${anu.caption.full_name}\n⭔ User Name : ${anu.caption.user_name}\n⭔ ID ${anu.caption.user_id}\n⭔ Followers : ${anu.caption.followers}\n⭔ Following : ${anu.caption.following}\n⭔ Bussines : ${anu.caption.bussines}\n⭔ Profesional : ${anu.caption.profesional}\n⭔ Verified : ${anu.caption.verified}\n⭔ Private : ${anu.caption.private}\n⭔ Bio : ${anu.caption.biography}\n⭔ Bio Url : ${anu.caption.bio_url}`, m)
 }
 break
 		
@@ -3225,146 +3216,35 @@ XBotInc.sendMessage(m.chat, { delete: { remoteJid: m.chat, fromMe: true, id: m.q
 }
             break
 case 'bcgc': case 'bcgroup': {
-if (isBan) return reply(mess.ban)	 			
-if (isBanChat) return reply(mess.banChat)
-if (!isCreator) return replay(mess.owner)
-if (!args.join(" ")) return replay(`Where is the text?\n\nExample : ${prefix + command} ${global.ownername}`)
+if (!isCreator) throw mess.owner
+if (!text) throw `Text hey\n\nExample : ${prefix + command} chatinfo`
 let getGroups = await XBotInc.groupFetchAllParticipating()
 let groups = Object.entries(getGroups).slice(0).map(entry => entry[1])
 let anu = groups.map(v => v.id)
-let unicorn = await getBuffer(picak+'BROADCAST')
-replay(`Send broadcast to ${anu.length} group chat, time's up ${anu.length * 1.5} second`)
+m.reply(`Mengirim Broadcast Ke ${anu.length} Group Chat, Waktu Selesai ${anu.length * 1.5} detik`)
 for (let i of anu) {
 await sleep(1500)
-let buttons = [
-{buttonId: `menu`, buttonText: {displayText: 'Menu'}, type: 1}
-]
-let ntus = {
-image: unicorn,
-jpegThumbnail: log0,
-caption: text,
-footer: `${botname}`,
-buttons: buttons,
-headerType: 4,
-contextInfo:{externalAdReply:{
-title:"I deserve something for my hardwork",
-body: "Click to follow", 
-thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
-mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://github.com/NEXUSAT12/"
-}}
+let txt = `「 Broadcast Bot 」\n\n${text}`
+let buttons = [{ buttonId: 'sc', buttonText: { displayText: 'SUPPORT' }, type: 1 }]
+await XBotInc.sendButtonText(i, buttons, txt,  m, {quoted: fkontak})
 }
-XBotInc.sendMessage(m.chat , ntus , { quoted: m })
-}
-replay(`Successfully Sent Broadcast To ${anu.length} Group`)
+m.reply(`Sukses Mengirim Broadcast Ke ${anu.length} Group`)
 }
 break
 case 'bc': case 'broadcast': case 'bcall': {
-if (isBan) return reply(mess.ban)	 			
-if (isBanChat) return reply(mess.banChat)
-if (!isCreator) return replay(mess.owner)
-let unicorn =  await getBuffer(picak+'BROADCAST')
-if (!args.join(" ")) return replay(`Where is the text??\n\nExample : ${prefix + command} ${global.ownername}`)
+if (!isCreator) throw mess.owner
+if (!text) throw `Text hey \n\nExample : ${prefix + command} chatinfo`
 let anu = await store.chats.all().map(v => v.id)
-replay(`Send Broadcast To ${anu.length} Chat\nTime's up ${anu.length * 1.5} second`)
-for (let yoi of anu) {
-await sleep(1500)
-let buttons = [
-{buttonId: `sc`, buttonText: {displayText: 'SUPPORT'}, type: 1}
-]
-let ntus = {
-image: unicorn,
-jpegThumbnail: log0,
-caption: text,
-footer: `${botname}`,
-buttons: buttons,
-headerType: 4,
-contextInfo:{externalAdReply:{
-title:"I deserve something for my hardwork",
-body: "Click to donate", 
-thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
-mediaType:1,
-mediaUrl: 'https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg',
-sourceUrl: "https://github.com/NEXUSAT12"
-}}
-}
-XBotInc.sendMessage(m.chat , ntus , { quoted: m })
-}
-replay('Broadcast Success')
+m.reply(`Mengirim Broadcast Ke ${anu.length} Chat\nWaktu Selesai ${anu.length * 1.5} detik`)
+		for (let yoi of anu) {
+		await sleep(1500)
+		let txt = `「 Broadcast Bot 」\n\n${text}`
+		let buttons = [{ buttonId: 'sc', buttonText: { displayText: '👑 support' }, type: 1 }]
+            await XBotInc.sendButtonText(yoi, buttons, txt, m, {quoted: fkontak})
+		}
+		m.reply('Success Broadcast')
 }
 break
- case 'bcimage': case 'bcvideo': case 'bcaudio': {
-                  if (isBan) return reply(mess.ban)	 			
-if (isBanChat) return reply(mess.banChat)
-if (!isCreator) return replay(mess.owner)
-                if (!/video/.test(mime) && !/image/.test(mime) && !/audio/.test(mime)) return reply(`*Send/Reply Video/Audio/Image You Want to Broadcast With Caption* ${prefix + command}`)
-                let anu = await store.chats.all().map(v => v.id)
-                let ftroli = {key: {fromMe: false,"participant":"0@s.whatsapp.net", "remoteJid": "916909137213-1604595598@g.us"}, "message": {orderMessage: {itemCount: 999999999,status: 200, thumbnail: fs.readFileSync('./TEAM_XMEDIA/theme/NEXUS.jpg'), surface: 200, message: `${ownername}'s Broadcast`, orderTitle: `${botname}`, sellerJid: '0@s.whatsapp.net'}}, contextInfo: {"forwardingScore":999,"isForwarded":true},sendEphemeral: true}
-                reply(`*Send Broadcast To* ${anu.length} *Group Chat, Time ${anu.length * 1.5} secs*`)
-                for (let i of anu) {
-                    await sleep(1500)
-                    let butoon = [{
-                                urlButton: {
-                                displayText: 'github 🍓',
-url: `${global.websitex}`
-                                }
-                            }, {
-urlButton: {
-displayText: 'Script 🍜',
-url: `${global.botscript}`
-}
-}, {
-quickReplyButton: {
-displayText: 'Bot Status 🚀',
-id: 'ping'
-}
-}, {
-quickReplyButton: {
-displayText: 'Menu 🐰',
-id: 'menu'
-}  
-}, {
-quickReplyButton: {
-displayText: 'Owner 😈',
-id: 'owner'
-}
-}]
-                    let media = await XBotInc.downloadAndSaveMediaMessage(quoted)
-                    let buffer = fs.readFileSync(media)
-                    if (/webp/.test(mime)) {
-                    XBotInc.sendMessage(i, { sticker: { url: media } }, { quoted: ftroli })
-                    } else if (/image/.test(mime)) {
-                    let DGx = `*「 ${global.ownername}'s Broadcast」*${text ? '\n\n' + text : ''}`
-                    XBotInc.send5ButImg(i, DGx, `${global.botname}`, buffer, butoon)
-                    } else if (/video/.test(mime)) {
-                    let DGx = `*「 ${global.ownername}'s Broadcast」*${text ? '\n\n' + text : ''}`
-                    XBotInc.sendMessage(i, {video: buffer, caption: `${botname}`}, { quoted: ftroli })
-                    } else if (/audio/.test(mime)) {
-                    XBotInc.sendMessage(i, {audio: buffer, mimetype: 'audio/mpeg'}, { quoted : ftroli })
-                    } else {
-                    reply(`*Send/Reply Video/Audio/Image You Want to Broadcast With Caption* ${prefix + command}`)
-                    }
-                    await fs.unlinkSync(media)
-                    }
-                reply(` *Send Broadcast To* ${anu.length} *Chats*`)
-            }
-            break
-case 'bcloc': {
-if (isBan) return reply(mess.ban)	 			
-if (isBanChat) return reply(mess.banChat)
-if (!isCreator) return replay(mess.owner)
-                if (!text) return reply(`Use ${prefix}bcloc text\n\nExample : ${prefix + command} attention everybody`)
-                let anu = await store.chats.all().map(v => v.id)
-                let [melo, melo2] = text.split`|`
-                reply(`*Send Broadcast To* ${anu.length} Chat\nTime ${anu.length * 1.5} sec`)
-	     	for (let yoi of anu) {
-	     	await sleep(1500)
-		    var button = [{ buttonId: `${prefix}ho`, buttonText: { displayText: `${melo2}` }, type: 1 }]              
-            XBotInc.sendMessage(yoi, { caption: `${melo}`, location: { jpegThumbnail: await getBuffer(picak+`${ownername}'s Broadcast`) }, buttons: button, footer: `${botname}`, mentions: [m.sender] })
-		}		
-            }
-            break
 case 'chatinfo': {
 if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
@@ -4778,173 +4658,14 @@ Detek = tes.translate
 replay(`🌐Translate : ${Detek}\n📘Results : ${Infoo}`)
 }
 break
-case 'sound1':
-case 'sound2':
-case 'sound3':
-case 'sound4':
-case 'sound5':
-case 'sound6':
-case 'sound7':
-case 'sound8':
-case 'sound9':
-case 'sound10':
-case 'sound11':
-case 'sound12':
-case 'sound13':
-case 'sound14':
-case 'sound15':
-case 'sound16':
-case 'sound17':
-case 'sound18':
-case 'sound19':
-case 'sound20':
-case 'sound21':
-case 'sound22':
-case 'sound23':
-case 'sound24':
-case 'sound25':
-case 'sound26':
-case 'sound27':
-case 'sound28':
-case 'sound29':
-case 'sound30':
-case 'sound31':
-case 'sound32':
-case 'sound33':
-case 'sound34':
-case 'sound35':
-case 'sound36':
-case 'sound37':
-case 'sound38':
-case 'sound39':
-case 'sound40':
-case 'sound41':
-case 'sound42':
-case 'sound43':
-case 'sound44':
-case 'sound45':
-case 'sound46':
-case 'sound47':
-case 'sound48':
-case 'sound49':
-case 'sound50':
-case 'sound51':
-case 'sound52':
-case 'sound53':
-case 'sound54':
-case 'sound55':
-case 'sound56':
-case 'sound57':
-case 'sound58':
-case 'sound59':
-case 'sound60':
-case 'sound61':
-case 'sound62':
-case 'sound63':
-case 'sound64':
-case 'sound65':
-case 'sound66':
-case 'sound67':
-case 'sound68':
-case 'sound69':
-case 'sound70':
-case 'sound71':
-case 'sound72':
-case 'sound73':
-case 'sound74':
-case 'sound75':
-case 'sound76':
-case 'sound77':
-case 'sound78':
-case 'sound79':
-case 'sound80':
-case 'sound81':
-case 'sound82':
-case 'sound83':
-case 'sound84':
-case 'sound85':
-case 'sound86':
-case 'sound87':
-case 'sound88':
-case 'sound89':
-case 'sound90':
-case 'sound91':
-case 'sound92':
-case 'sound93':
-case 'sound94':
-case 'sound95':
-case 'sound96':
-case 'sound97':
-case 'sound98':
-case 'sound99':
-case 'sound100':
-case 'sound101':
-case 'sound102':
-case 'sound103':
-case 'sound104':
-case 'sound105':
-case 'sound106':
-case 'sound107':
-case 'sound108':
-case 'sound109':
-case 'sound110':
-case 'sound111':
-case 'sound112':
-case 'sound113':
-case 'sound114':
-case 'sound115':
-case 'sound116':
-case 'sound117':
-case 'sound118':
-case 'sound119':
-case 'sound120':
-case 'sound121':
-case 'sound122':
-case 'sound123':
-case 'sound124':
-case 'sound125':
-case 'sound126':
-case 'sound127':
-case 'sound128':
-case 'sound129':
-case 'sound130':
-case 'sound131':
-case 'sound132':
-case 'sound133':
-case 'sound134':
-case 'sound135':
-case 'sound136':
-case 'sound137':
-case 'sound138':
-case 'sound139':
-case 'sound140':
-case 'sound141':
-case 'sound142':
-case 'sound143':
-case 'sound144':
-case 'sound145':
-case 'sound146':
-case 'sound147':
-case 'sound148':
-case 'sound149':
-case 'sound150':
-case 'sound151':
-case 'sound152':
-case 'sound153':
-case 'sound154':
-case 'sound155':
-case 'sound156':
-case 'sound157':
-case 'sound158':
-case 'sound159':
-case 'sound160':
-case 'sound161':
+case 'sound':{
+if(!text) return reply(`example sound56 \n you can use sound till 161`)
 if (isBan) return reply(mess.ban)
-	if (isBanChat) return reply(mess.banChat)
-let xeony_buffer = await getBuffer(`https://github.com/NEXUSAT12/Xsound-api/raw/master/tiktokmusic/${command}.mp3`)
-await XBotInc.sendMessage(m.chat, { audio: xeony_buffer, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
+if (isBanChat) return reply(mess.banChat)
+let _buffer = await getBuffer(`https://github.com/NEXUSAT12/Xsound-api/raw/master/tiktokmusic/${text}.mp3`)
+await XBotInc.sendMessage(m.chat, { audio: _buffer, mimetype: 'audio/mp4', ptt: true }, { quoted: m })     
+}
 break
-
 case'glitch3':
    if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
@@ -6363,6 +6084,20 @@ reply(String(err))
 }
 }
 break
+case 'tourl': {
+m.reply(mess.wait)
+let { UploadFileUgu, webp2mp4File, TelegraPh } = require('./lib/uploader')
+let media = await XBotInc.downloadAndSaveMediaMessage(quoted)
+if (/image/.test(mime)) {
+let anu = await TelegraPh(media)
+m.reply(util.format(anu))
+} else if (!/image/.test(mime)) {
+let anu = await UploadFileUgu(media)
+m.reply(util.format(anu))
+}
+await fs.unlinkSync(media)
+}
+break
 case 'ig': {
 	   if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
@@ -6411,22 +6146,20 @@ reply("Link error")
 }
 }
 break
-case 'igtv': {	            
-   if (isBan) return reply(mess.ban)	 			
-if (isBanChat) return reply(mess.banChat)
-                if (!text) return reply(`Where is the link boss?`)
-                const { instagramdl, instagramdlv2, instagramdlv3 } = require('@bochilteam/scraper')
-                if (!isUrl(args[0]) && !args[0].includes('instagram.com')) return reply('*The link you provided is not valid*')
-                instagramdlv3(`${text}`).then(async (data) => {            
-                var buf = await getBuffer(data[0].thumbnail)        
-                XBotInc.sendMessage(m.chat, { video: { url: data[0].url }, jpegThumbnail:buf, caption: `${botname}`}, { quoted: m })
-                }).catch((err) => {
-                    reply(mess.error)
-                })
-            }
-            break
-            case 'twitter': case 'td': case 'twitterdl': {     
-   if (isBan) return reply(mess.ban)	 			
+case 'instagram': case 'ig': case 'igdl': {
+if (!text) throw 'No Query Url!'
+m.reply(mess.wait)
+if (/(?:\/p\/|\/reel\/|\/tv\/)([^\s&]+)/.test(isUrl(text)[0])) {
+let anu = await fetchJson(api('zenz', '/downloader/instagram2', { url: isUrl(text)[0] }, 'apikey'))
+for (let media of anu.data) naze.sendFileUrl(m.chat, media, `Download Url Instagram From ${isUrl(text)[0]}`, m)
+} else if (/\/stories\/([^\s&]+)/.test(isUrl(text)[0])) {
+let anu = await fetchJson(api('zenz', '/downloader/instastory', { url: isUrl(text)[0] }, 'apikey'))
+XBotInc.sendFileUrl(m.chat, anu.media[0].url, `Download Url Instagram From ${isUrl(text)[0]}`, m)
+}
+}
+break
+case 'twitter': case 'td': case 'twitterdl': {     
+if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)	             
              if (!text) return reply(`Where is the link?`)
                 if (!isUrl(args[0]) && !args[0].includes('twitter.com')) return reply(`The link you provided is not valid`)
@@ -8078,88 +7811,83 @@ reply(mess.error)
     XBotInc.sendMessage(from, { audio: { url: xeonytiktokaudio }, mimetype: 'audio/mp4' }, { quoted: m })
    }
  break
- case 'play': case 'ytplay': {
-                if (!text) throw `Example : ${prefix + command} story wa anime`
-                let yts = require("youtube-search")
-                let search = await yts(text)
-                let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
-                let buttons = [
-                    {buttonId: `ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
-                    {buttonId: `ytmp4 ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
-                ]
-                let buttonMessage = {
-                    image: { url: anu.thumbnail },
-                    caption: `
-${themeemoji} Title : ${anu.title}
-${themeemoji} Ext : Search
-${themeemoji} ID : ${anu.videoId}
-${themeemoji} Duration : ${anu.timestamp}
-${themeemoji} Viewers : ${anu.views}
-${themeemoji} Upload At : ${anu.ago}
-${themeemoji} Author : ${anu.author.name}
-${themeemoji} Channel : ${anu.author.url}
-${themeemoji} Description : ${anu.description}
-${themeemoji} Url : ${anu.url}`,
-                    footer: botname,
+case 'play': case 'ytplay': {
+if (!text) throw `Example : ${prefix + command} story wa anime`
+let yts = require("yt-search")
+let search = await yts(text)
+let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
+let buttons = [
+{buttonId: `ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
+{buttonId: `ytmp4 ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
+]
+let buttonMessage = {
+image: { url: anu.thumbnail },
+caption: `
+⭔ Title : ${anu.title}
+⭔ Ext : Search
+⭔ ID : ${anu.videoId}
+⭔ Duration : ${anu.timestamp}
+⭔ Viewers : ${anu.views}
+⭔ Upload At : ${anu.ago}
+⭔ Author : ${anu.author.name}
+⭔ Channel : ${anu.author.url}
+⭔ Description : ${anu.description}
+⭔ Url : ${anu.url}`,
+                    footer: `${botname}`,
                     buttons: buttons,
                     headerType: 4
                 }
                 XBotInc.sendMessage(m.chat, buttonMessage, { quoted: m })
             }
             break
- case 'ytmp3': case 'ytaudio': {
-                let yta = await await youtubedlv2(text).catch(async _ => await youtubedl(text)).catch(async _ => await youtubedlv3(text))
+	    case 'ytmp3': case 'ytaudio': {
+                let { yta } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 128kbps`
-                let media = await yta.audio['128kbps'].download()
-                if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
+                let quality = args[1] ? args[1] : '128kbps'
+                let media = await yta(text, quality)
+                if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
+                XBotInc.sendImage(m.chat, media.thumb, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, m)
                 XBotInc.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
             }
             break
             case 'ytmp4': case 'ytvideo': {
+                let { ytv } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} https://youtube.com/watch?v=PtFMh6Tccag%27 360p`
-                const ytv = await youtubedl(text).catch(async () => await  youtubedlv2(text))
-                let media = await ytv.video['360kbps'].download()
-                if (media.filesize >= 100000) return m.reply('File Over Limit '+util.format(media))
-                XBotInc.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `${themeemoji} Title : ${media.title}\n${themeemoji} File Size : ${media.filesizeF}\n${themeemoji} Url : ${isUrl(text)}\n${themeemoji} Ext : MP3\n${themeemoji} Resolution : ${args[1] || '360p'}` }, { quoted: m })
+                let quality = args[1] ? args[1] : '360p'
+                let media = await ytv(text, quality)
+                if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
+                XBotInc.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${isUrl(text)}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}` }, { quoted: m })
             }
             break
-	    case 'getmusicxxx': {
+	    case 'getmusic': {
                 let { yta } = require('./lib/y2mate')
+                if (!text) throw `Example : ${prefix + command} 1`
+                if (!m.quoted) return m.reply('Reply Pesan')
+                if (!m.quoted.isBaileys) throw `Hanya Bisa Membalas Pesan Dari Bot`
 		let urls = quoted.text.match(new RegExp(/(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed|shorts)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)/, 'gi'))
+                if (!urls) throw `Mungkin pesan yang anda reply tidak mengandung result ytsearch`
                 let quality = args[1] ? args[1] : '128kbps'
                 let media = await yta(urls[text - 1], quality)
-                if (media.filesize >= 100000) return reply('File Over Limit '+util.format(media))
-                XBotInc.sendImage(m.chat, media.thumb, `🐦 Title : ${media.title}\n🐦 File Size : ${media.filesizeF}\n🐦 Url : ${urls[text - 1]}\n🐦 Ext : MP3\n🐦 Resolution : ${args[1] || '128kbps'}`, m)
+                if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
+                XBotInc.sendImage(m.chat, media.thumb, `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${urls[text - 1]}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '128kbps'}`, m)
                 XBotInc.sendMessage(m.chat, { audio: { url: media.dl_link }, mimetype: 'audio/mpeg', fileName: `${media.title}.mp3` }, { quoted: m })
             }
             break
-            case 'getvideoxxx': {
+            case 'getvideo': {
                 let { ytv } = require('./lib/y2mate')
                 if (!text) throw `Example : ${prefix + command} 1`
-                if (!m.quoted) throw 'Reply Message'
-                if (!m.quoted.isBaileys) throw `Can Only Reply To Meessages From Bots`
+                if (!m.quoted) return m.reply('Reply Pesan')
+                if (!m.quoted.isBaileys) throw `Hanya Bisa Membalas Pesan Dari Bot`
                 let urls = quoted.text.match(new RegExp(/(?:https?:\/\/)?(?:youtu\.be\/|(?:www\.|m\.)?youtube\.com\/(?:watch|v|embed|shorts)(?:\.php)?(?:\?.*v=|\/))([a-zA-Z0-9\_-]+)/, 'gi'))
-                if (!urls) throw`Maybe The Message You Replied Does Not Contain The Video Search Result`
+                if (!urls) throw `Mungkin pesan yang anda reply tidak mengandung result ytsearch`
                 let quality = args[1] ? args[1] : '360p'
                 let media = await ytv(urls[text - 1], quality)
-                if (media.filesize >= 100000) return reply('File Over Limit '+util.format(media))
-                XBotInc.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `🐦 Title : ${media.title}\n🐦 File Size : ${media.filesizeF}\n🐦 Url : ${urls[text - 1]}\n🐦 Ext : MP3\n🐦 Resolution : ${args[1] || '360p'}` }, { quoted: m })
+                if (media.filesize >= 100000) return m.reply('File Melebihi Batas '+util.format(media))
+                XBotInc.sendMessage(m.chat, { video: { url: media.dl_link }, mimetype: 'video/mp4', fileName: `${media.title}.mp4`, caption: `⭔ Title : ${media.title}\n⭔ File Size : ${media.filesizeF}\n⭔ Url : ${urls[text - 1]}\n⭔ Ext : MP3\n⭔ Resolusi : ${args[1] || '360p'}` }, { quoted: m })
             }
             break
 
- case 'ytvd': {
-    if (isBan) return reply(mess.banned)	 			
- if (isBanChat) return reply(mess.bangc)
- XBotInc.sendMessage(from, {video:{url:args[0]}, mimetype:"video/mp4", caption:"Here it is...",}, {quoted:m})
- }
- break
 
- case 'ytad': {
-    if (isBan) return reply(mess.banned)	 			
-    if (isBanChat) return reply(mess.bangc)
- XBotInc.sendMessage(from, {audio:{url:args[0]}, mimetype:"audio/mp4", ptt:true}, {quoted:m})
- }
- break
 case 'ytshorts': case 'shorts': {
    if (isBan) return reply(mess.ban)	 			
 if (isBanChat) return reply(mess.banChat)
@@ -11053,19 +10781,6 @@ sourceUrl: "https://github.com/NEXUSAT12"
 XBotInc.sendMessage(m.chat , ntus , { quoted: m })
 }
 break
-case 'buglink':
-XBotInc.sendMessage(from, xbug2(prefix), text, { quoted:ftrol, contextInfo :{text: '🔥',
-"forwardingScore": 1000000000,
-isForwarded: false,
-sendEphemeral: false,
-"externalAdReply": {
-"title": `${xbug2(prefix)}`,
-"body": "",
-"previewType": "PHOTO",
-"thumbnailUrl": "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg",
-"thumbnail": fs.readFileSync('./TEAM_XMEDIA/theme/NEXUS.jpg'),
-"sourceUrl": "https://github.com/NEXUSAT12/"}}})
-break
 case 'tqtt': {
 if (isBan) return reply(mess.ban)
 if (isBanChat) return reply(mess.banChat)
@@ -11073,7 +10788,7 @@ var unicorn = await getBuffer(picak+'THANKS TO')
 let teks = `╔══𓊈𝓓𝓔𝓥𝓔𝓛𝓞𝓟𝓔𝓡 𝓞𝓕 𝓣𝓔𝓐𝓜-𝓧_FIRE𓊉══╗\n╠𝐌𝐫.𝐍𝐞𝐱𝐮𝐬(𝐚𝐲𝐮𝐬𝐡)🔥: 𝐭𝐡𝐞 𝐦𝐚𝐢𝐧 𝐝𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐚𝐧𝐝 𝐭𝐡𝐞 𝐥𝐞𝐚𝐝𝐞𝐫 𝐨𝐟 𝐭𝐞𝐚𝐦-𝐗_𝐅𝐈𝐑𝐄\n╠𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 :𓆩😈𓆪  https://wa.me/+918130784851𓆩😎𓆪 \n╠𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 :⧼ ᥬ🥰᭄ 𝐃𝐎𝐍𝐓 𝐅𝐎𝐑𝐆𝐄𝐓 𝐓𝐎 𝐅𝐎𝐋𝐋𝐎𝐖 ⧽ https://www.instagram.com/at.__010/ \n ╠𝐆𝐈𝐓𝐇𝐔𝐁 : https://github.com/NEXUSAT12 \n ╔═╾ 𝟐𝐧𝐝 𝐃𝐄𝐕𝐄𝐋𝐎𝐏𝐄𝐑 ╼═╗\n╠𝐌𝐫.𝐏𝐈𝐊𝐀(𝐀𝐑𝐈𝐅)✨ : 𝐇𝐄𝐋𝐏𝐄𝐃 𝐈𝐍 𝐅𝐎𝐔𝐍𝐃𝐈𝐍𝐆 𝐓𝐇𝐄 𝐀𝐏𝐈 𝐀𝐍𝐃 𝐃𝐄𝐒𝐒𝐈𝐆𝐍𝐈𝐍𝐆 𝐎𝐅 𝐁𝐎𝐓 \n╠𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 : https://wa.me/+918811074852\n╠𝐆𝐈𝐓𝐇𝐔𝐁: https://github.com/Pika4O4`
 let xadio = fs.readFileSync('./TEAM_XMEDIA/audio/Nexus.mp3')
 let aus = {
-audio: xadio, mimetype: 'audio/mp4', ptt: true,
+audio: xadio, mimetype: 'audio/mpeg', ptt: true,
 footer: `${botname}`,
 headerType: 4,
 contextInfo:{externalAdReply:{
@@ -11089,32 +10804,13 @@ XBotInc.sendMessage(m.chat , aus , { quoted: m }),
 XBotInc.sendMessage(m.chat,{image:unicorn ,caption:teks}, { quoted: m })
 }
 break
-case 'bug1': {
-if (!isCreator) return
-reply(`${xbug}`)}
-break
-case 'oneshot': {
-XBotInc.toggleDisappearingMessages(from, 0)
-if (!isCreator) return
-let lodaChoos = fs.readFileSync('./XBUG/xbug.sound')
-XBotInc.sendMessage(m.chat, {document: lodaChoos, mimetype: 'application/octet-stream', fileName:`${botname} ${xbug2}.sound` }, {quoted:fdoc})
+case 'tts': {
+if (!text) throw `Example : ${prefix + command} text`
+let tts = await fetchJson(`https://api.akuari.my.id/texttovoice/texttosound_id?query=${text}`)
+XBotInc.sendMessage(m.chat, { audio: { url: tts.result }, mimetype: 'audio/mpeg', fileName: `${text}.mp3` }, { quoted: fvn })
 }
 break
-case 'bug2': {
-if (!isCreator) return
-let ntus = {
-contextInfo:{externalAdReply:{
-title:`${xbug}`,
-body: `👺⃢𝙉𝙀𝙐𝙎⃢👺👾${xbug}`,
-thumbnail: fs.readFileSync("TEAM_XMEDIA/theme/NEXUS.jpg"),
-mediaType:1,
-mediaUrl: "https://i.pinimg.com/564x/1e/9a/c9/1e9ac9e3ec037fa9642fba616e4d35be.jpg",
-sourceUrl: "https://github.com/NEXUSAT12"
-}}
-}
-XBotInc.sendMessage(m.chat , ntus , { quoted: m })
-}
-break
+
 
             default:
                 if (budy.startsWith('=>')) {
