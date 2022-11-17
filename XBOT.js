@@ -7797,19 +7797,17 @@ reply(mess.error)
    }
  break
 case 'music': case 'play': case 'song': case 'ytplay': {
-    if (isBan) return reply(mess.banned)	 			
+ if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
  const YT=require('./lib/ytdl')
  const { isUrl, fetchBuffer } = require('./lib/Function')
-
- if(!text) return AnyaPika.sendMessage(from,{text:"Pls enter song name to play!"},{quoted:m})
+ if(!text) return XBotInc.sendMessage(from,{text:"Pls enter song name to play!"},{quoted:m})
  let yts = require("yt-search")
  let search = await yts(text)
  let anu = search.videos[0]
  let buttons = [
  {buttonId: `${prefix}ytad ${text}`, buttonText: {displayText: '♫ Audio'}, type: 1},
  {buttonId: `${prefix}ytvd ${text}`, buttonText: {displayText: '► Video'}, type: 1}
-
  ]
  let buttonMessage = {
  image: { url: anu.thumbnail },
@@ -7825,9 +7823,8 @@ case 'music': case 'play': case 'song': case 'ytplay': {
  footer: `${botname}`,
  buttons: buttons,
  headerType: 4,
-
  }
- AnyaPika.sendMessage(m.chat, buttonMessage, { quoted: m })
+XBotInc.sendMessage(m.chat, buttonMessage, { quoted: m })
  }
  break
 case 'ytad': case 'getmusic': case 'yt': case 'youtube': case 'ytmp3': case 'ytmusic': case 'ytdl': {
@@ -7842,11 +7839,9 @@ case 'ytad': case 'getmusic': case 'yt': case 'youtube': case 'ytmp3': case 'ytm
     let stats = fs.statSync(ytmp3play.path)
     let fileSizeInBytes = stats.size;
     if (fileSizeInBytes > 60000000) return reply('Cant send audios longer than 60 MB!')
-    
- await AnyaPika.sendMessage(from, {document: fs.readFileSync(ytmp3play.path),fileName: anu.title + '.mp3',mimetype: 'audio/mpeg',}, {quoted:m})
+ XBotInc.sendMessage(from, {document: fs.readFileSync(ytmp3play.path),fileName: anu.title + '.mp3',mimetype: 'audio/mpeg',}, {quoted:m})
  }
  break
-
  case 'ytvd': case 'getvideo': case 'ytvideo': case 'ytmp4': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
@@ -7858,7 +7853,7 @@ case 'ytad': case 'getmusic': case 'yt': case 'youtube': case 'ytmp3': case 'ytm
     const ytmp4play = await YT.mp4(anu.url)
     let vidduration =ytmp4play.duration;
     if (vidduration > 1800) return reply('Cant send videos longer than *30 min*')
- AnyaPika.sendMessage(from, {video:{url:ytmp4play.videoUrl}, mimetype:"video/mp4", caption:anu.title+` By *${botname} MD*`,}, {quoted:m})
+XBotInc.sendMessage(from, {video:{url:ytmp4play.videoUrl}, mimetype:"video/mp4", caption:anu.title+` By *${botname} MD*`,}, {quoted:m})
  }
  break
 case 'ytshorts': case 'shorts': {
@@ -10759,7 +10754,7 @@ case 'tqtt': {
 if (isBan) return reply(mess.ban)
 if (isBanChat) return reply(mess.banChat)
 var unicorn = await getBuffer(picak+'THANKS TO')
-let teks = `╔══𓊈𝓓𝓔𝓥𝓔𝓛𝓞𝓟𝓔𝓡 𝓞𝓕 𝓣𝓔𝓐𝓜-𝓧_FIRE𓊉══╗\n╠𝐌𝐫.𝐍𝐞𝐱𝐮𝐬(𝐚𝐲𝐮𝐬𝐡)🔥: 𝐭𝐡𝐞 𝐦𝐚𝐢𝐧 𝐝𝐞𝐯𝐞𝐥𝐨𝐩𝐞𝐫 𝐚𝐧𝐝 𝐭𝐡𝐞 𝐥𝐞𝐚𝐝𝐞𝐫 𝐨𝐟 𝐭𝐞𝐚𝐦-𝐗_𝐅𝐈𝐑𝐄\n╠𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 :𓆩😈𓆪  https://wa.me/+918130784851𓆩😎𓆪 \n╠𝐈𝐍𝐒𝐓𝐀𝐆𝐑𝐀𝐌 :⧼ ᥬ🥰᭄ 𝐃𝐎𝐍𝐓 𝐅𝐎𝐑𝐆𝐄𝐓 𝐓𝐎 𝐅𝐎𝐋𝐋𝐎𝐖 ⧽ https://www.instagram.com/at.__010/ \n ╠𝐆𝐈𝐓𝐇𝐔𝐁 : https://github.com/NEXUSAT12 \n ╔═╾ 𝟐𝐧𝐝 𝐃𝐄𝐕𝐄𝐋𝐎𝐏𝐄𝐑 ╼═╗\n╠𝐌𝐫.𝐏𝐈𝐊𝐀(𝐀𝐑𝐈𝐅)✨ : 𝐇𝐄𝐋𝐏𝐄𝐃 𝐈𝐍 𝐅𝐎𝐔𝐍𝐃𝐈𝐍𝐆 𝐓𝐇𝐄 𝐀𝐏𝐈 𝐀𝐍𝐃 𝐃𝐄𝐒𝐒𝐈𝐆𝐍𝐈𝐍𝐆 𝐎𝐅 𝐁𝐎𝐓 \n╠𝐂𝐎𝐍𝐓𝐀𝐂𝐓 𝐈𝐍𝐅𝐎𝐑𝐌𝐀𝐓𝐈𝐎𝐍 : https://wa.me/+918811074852\n╠𝐆𝐈𝐓𝐇𝐔𝐁: https://github.com/Pika4O4`
+let teks = ` ➦༶•┈┈⛧┈♛${botname}𝙳𝙴𝚅𝙴𝙻𝙾𝙿𝙴𝚁♛┈⛧┈┈•༶                                ➬ 𝙼𝚈 𝙽𝙰𝙼𝙴 𝙸𝚂 𝙽𝙴𝚇𝚄𝚂(𝙰𝚈𝚄𝚂𝙷)  𝙸 𝙰𝙼 𝚃𝙷𝙴 𝙼𝙰𝙸𝙽 𝙳𝙴𝚅𝙴𝙻𝙾𝙿𝙴𝚁 𝙲𝚁𝙴𝙰𝚃𝙾𝚁 𝙾𝙵             ${botname} 𝚃𝚈𝙿𝙴 𝙾𝚆𝙽𝙴𝚁𝙸𝙽𝙵𝙾 𝚃𝙾 𝙶𝙴𝚃 𝙼𝚈 𝙽𝙾 𝙰𝙽𝙳 𝙾𝚃𝙷𝙴𝚁 𝚂𝙾𝙲𝙸𝙰𝙻 𝙼𝙴𝙳𝙸𝙰               ➷ 𝙸 𝙷𝙾𝙿𝙴 𝚈𝙾𝚄 𝙴𝙽𝙹𝙾𝚈𝙸𝙽𝙶 𝚃𝙷𝙴 𝙱𝙾𝚃 𝙰𝙽𝙳 𝙷𝙰𝚅𝙸𝙽𝙶 𝙵𝚄𝙽 ➹                                 `
 let xadio = fs.readFileSync('./TEAM_XMEDIA/audio/Nexus.mp3')
 let aus = {
 audio: xadio, mimetype: 'audio/mpeg', ptt: true,
