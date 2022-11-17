@@ -7799,7 +7799,7 @@ reply(mess.error)
 case 'music': case 'play': case 'song': case 'ytplay': {
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
- const YT=require('./lib/ytdlcore')
+ const YT=require('./lib/ytdl')
  const { isUrl, fetchBuffer } = require('./lib/Function')
 
  if(!text) return AnyaPika.sendMessage(from,{text:"Pls enter song name to play!"},{quoted:m})
@@ -7834,7 +7834,7 @@ case 'ytad': case 'getmusic': case 'yt': case 'youtube': case 'ytmp3': case 'ytm
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
     reply(` Getting  your 𝗮𝘂𝗱𝗶𝗼 ${pushname}_`)
-    const YT=require('./lib/ytdlcore')
+    const YT=require('./lib/ytdl')
     let yts = require("yt-search")
     let search = await yts(text)
     let anu = search.videos[0]
@@ -7851,7 +7851,7 @@ case 'ytad': case 'getmusic': case 'yt': case 'youtube': case 'ytmp3': case 'ytm
     if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
     reply(`Getting ready your 𝘃𝗶𝗱𝗲𝗼 ${pushname}_`)
- const YT=require('./lib/ytdlcore')
+ const YT=require('./lib/ytdl')
     let yts = require("yt-search")
     let search = await yts(text)
     let anu = search.videos[0]
