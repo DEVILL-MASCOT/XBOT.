@@ -7813,7 +7813,7 @@ case 'music': case 'play': case 'song': case 'ytplay': {
  ]
  let buttonMessage = {
  image: { url: anu.thumbnail },
- caption: `「  _${botname} Youtube Player 2.0_  」
+ caption: `「  _${botname} Youtube Player  」
 
 *Title :* ${anu.title}
 
@@ -7822,7 +7822,7 @@ case 'music': case 'play': case 'song': case 'ytplay': {
 *Uploaded :* ${anu.ago}
 *Channel :* ${anu.author.name}
 *Url :* ${anu.url}`,
- footer: `${footer}`,
+ footer: `${botname}`,
  buttons: buttons,
  headerType: 4,
 
@@ -10730,6 +10730,7 @@ let teks =  `╔═══════➻「 𝓸𝓽𝓱𝓮𝓻 」
 ╠🔥${prefix}𝙳𝚘𝚗𝚊𝚝𝚎
 ╠🔥${prefix}𝚁𝚎𝚚𝚞𝚎𝚜𝚝
 ╠🔥${prefix}𝚁𝚎𝚙𝚘𝚛𝚝 [𝙱𝚞𝚐]
+╠🔥${prefix}𝚝𝚝𝚜
 ╽
 ╚┅┅┅┅┅┅┅༻` 
 let buttns = [
