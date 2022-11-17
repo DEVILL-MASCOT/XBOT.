@@ -35,11 +35,6 @@ const Xtod = require("tod-api")
 const { pinterest } = require("./lib/pinterest")
 const toHur = require('@develoka/angka-terbilang-js')
 const { hentai } = require('./lib/scraper2.js')
-const { xbug } = require('./XBUG/xbug.js')
-const { xbug2 } = require('./XBUG/xbug2.js')
-const { youtubeSearch, youtubedl, youtubedlv2, youtubedlv3 } = require('@bochilteam/scraper')
-const { instagramStalk } = require('@bochilteam/scraper')
-
 const {
  FajarNews, 
  BBCNews,
@@ -792,19 +787,12 @@ XBotInc.sendMessage(from, {text:`\`\`\`「 Link Detected 」\`\`\`\n\n@${kice.sp
 					XBotInc.sendMessage(m.chat, { image: result }, { quoted: m })
 					}
 			}
-			  //if (Autoreply) //remove forwad slashes to make it autoreply on off
 					for (let anjh of xeonyvideo){
 				if (budy === anjh){
 					let result = fs.readFileSync(`./TEAM_XMEDIA/video/${anjh}.mp4`)
 					XBotInc.sendMessage(m.chat, { video: result }, { quoted: m })
 					}
 				  }
-
-	    
-	    
-	    
-	    
-//emoji 
 const emote = (satu, dua) => {
 try{	    
 const { EmojiAPI } = require("emoji-api");
@@ -1138,16 +1126,13 @@ const latensie = speed() - timestampe
    │✑  Please Select
    │✑  The Button Below
    └─────────────┈ ⳹`
-   
-   //randoming function
 function pickRandom(list) {
 return list[Math.floor(list.length * Math.random())]
 }
-//document randomizer
 let documents = [doc1,doc2,doc3,doc4,doc5,doc6]
 let docs = pickRandom(documents)
 
-// short story
+
 async function cerpen (category) {
     return new Promise((resolve, reject) => {
         let title = category.toLowerCase().replace(/[()*]/g, "")
@@ -7811,40 +7796,45 @@ reply(mess.error)
     XBotInc.sendMessage(from, { audio: { url: xeonytiktokaudio }, mimetype: 'audio/mp4' }, { quoted: m })
    }
  break
-case 'play': case 'ytplay': {
-if (!text) throw `Example : ${prefix + command} story wa anime`
-let yts = require("yt-search")
-let search = await yts(text)
-let anu = search.videos[Math.floor(Math.random() * search.videos.length)]
-let buttons = [
-{buttonId: `ytmp3 ${anu.url}`, buttonText: {displayText: '♫ Audio'}, type: 1},
-{buttonId: `ytmp4 ${anu.url}`, buttonText: {displayText: '► Video'}, type: 1}
-]
-let buttonMessage = {
-image: { url: anu.thumbnail },
-caption: `
-⭔ Title : ${anu.title}
-⭔ Ext : Search
-⭔ ID : ${anu.videoId}
-⭔ Duration : ${anu.timestamp}
-⭔ Viewers : ${anu.views}
-⭔ Upload At : ${anu.ago}
-⭔ Author : ${anu.author.name}
-⭔ Channel : ${anu.author.url}
-⭔ Description : ${anu.description}
-⭔ Url : ${anu.url}`,
-                    footer: `${botname}`,
-                    buttons: buttons,
-                    headerType: 4
-                }
-                XBotInc.sendMessage(m.chat, buttonMessage, { quoted: m })
-            }
-            break
-	    case 'ytad': case 'getmusic': case 'yt': case 'youtube': case 'ytmp3': case 'ytmusic': case 'ytdl': {
+case 'music': case 'play': case 'song': case 'ytplay': {
+    if (isBan) return reply(mess.banned)	 			
+ if (isBanChat) return reply(mess.bangc)
+ const YT=require('./lib/ytdlcore')
+ const { isUrl, fetchBuffer } = require('./lib/Function')
+
+ if(!text) return AnyaPika.sendMessage(from,{text:"Pls enter song name to play!"},{quoted:m})
+ let yts = require("yt-search")
+ let search = await yts(text)
+ let anu = search.videos[0]
+ let buttons = [
+ {buttonId: `${prefix}ytad ${text}`, buttonText: {displayText: '♫ Audio'}, type: 1},
+ {buttonId: `${prefix}ytvd ${text}`, buttonText: {displayText: '► Video'}, type: 1}
+
+ ]
+ let buttonMessage = {
+ image: { url: anu.thumbnail },
+ caption: `「  _${botname1} Youtube Player 2.0_  」
+
+*Title :* ${anu.title}
+
+*Duration :* ${anu.timestamp}
+*Viewers :* ${anu.views}
+*Uploaded :* ${anu.ago}
+*Channel :* ${anu.author.name}
+*Url :* ${anu.url}`,
+ footer: `${footer}`,
+ buttons: buttons,
+ headerType: 4,
+
+ }
+ AnyaPika.sendMessage(m.chat, buttonMessage, { quoted: m })
+ }
+ break
+case 'ytad': case 'getmusic': case 'yt': case 'youtube': case 'ytmp3': case 'ytmusic': case 'ytdl': {
     if (isBan) return reply(mess.banned)	 			
     if (isBanChat) return reply(mess.bangc)
-    reply(`_Processing !!... Getting ready your 𝗮𝘂𝗱𝗶𝗼 ${pushname}_`)
-    const YT=require('./lib/ytdl')
+    reply(` Getting  your 𝗮𝘂𝗱𝗶𝗼 ${pushname}_`)
+    const YT=require('./lib/ytdlcore')
     let yts = require("yt-search")
     let search = await yts(text)
     let anu = search.videos[0]
@@ -7852,14 +7842,16 @@ caption: `
     let stats = fs.statSync(ytmp3play.path)
     let fileSizeInBytes = stats.size;
     if (fileSizeInBytes > 60000000) return reply('Cant send audios longer than 60 MB!')
+    
  await AnyaPika.sendMessage(from, {document: fs.readFileSync(ytmp3play.path),fileName: anu.title + '.mp3',mimetype: 'audio/mpeg',}, {quoted:m})
  }
  break
+
  case 'ytvd': case 'getvideo': case 'ytvideo': case 'ytmp4': {
- if (isBan) return reply(mess.banned)	 			
+    if (isBan) return reply(mess.banned)	 			
  if (isBanChat) return reply(mess.bangc)
-    reply(`_Processing !!... Getting ready your 𝘃𝗶𝗱𝗲𝗼 ${pushname}_`)
- const YT=require('./lib/ytdl')
+    reply(`Getting ready your 𝘃𝗶𝗱𝗲𝗼 ${pushname}_`)
+ const YT=require('./lib/ytdlcore')
     let yts = require("yt-search")
     let search = await yts(text)
     let anu = search.videos[0]
