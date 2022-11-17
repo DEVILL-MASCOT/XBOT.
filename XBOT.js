@@ -7813,7 +7813,7 @@ case 'music': case 'play': case 'song': case 'ytplay': {
  ]
  let buttonMessage = {
  image: { url: anu.thumbnail },
- caption: `「  _${botname1} Youtube Player 2.0_  」
+ caption: `「  _${botname} Youtube Player 2.0_  」
 
 *Title :* ${anu.title}
 
@@ -7858,7 +7858,7 @@ case 'ytad': case 'getmusic': case 'yt': case 'youtube': case 'ytmp3': case 'ytm
     const ytmp4play = await YT.mp4(anu.url)
     let vidduration =ytmp4play.duration;
     if (vidduration > 1800) return reply('Cant send videos longer than *30 min*')
- AnyaPika.sendMessage(from, {video:{url:ytmp4play.videoUrl}, mimetype:"video/mp4", caption:anu.title+` By *${botname1} MD*`,}, {quoted:m})
+ AnyaPika.sendMessage(from, {video:{url:ytmp4play.videoUrl}, mimetype:"video/mp4", caption:anu.title+` By *${botname} MD*`,}, {quoted:m})
  }
  break
 case 'ytshorts': case 'shorts': {
