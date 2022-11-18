@@ -22,6 +22,8 @@
 
 [![Deploy](https://www.herokucdn.com/deploy/button.svg)](https://heroku.com/deploy?template=https://github.com/NEXUSAT12/XBOT/)
 
+[![Deploy on Railway](https://railway.app/button.svg)](https://railway.app/new/template/l6ofev?referralCode=Mlt-Dn)
+
 ## SCAN QR CODE
 
 
